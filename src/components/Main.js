@@ -7,7 +7,7 @@ import MensClothing from "./products/mensClothing/MensClothing";
 import WomensClothing from "./products/womensClothing/WomensClothing";
 import Jewellery from "./products/jewellery/Jewellery";
 import Cart from "./Cart";
-import Search from "./SearchPage";
+import SearchedItem from "./SearchPage";
 
 const Main = () => {
 
@@ -19,7 +19,7 @@ const Main = () => {
           <Route exact path="/women's clothing" component={WomensClothing} />
           <Route exact path="/jewellery" component={Jewellery} />
           <Route exact path="/cart" component={Cart} />
-          <Route exact path="/search" component={Search} />
+          <Route exact path="/search/:txt" component={SearchedItem} />
           <Route path="/" component={MainPage} />
         </Switch>
     </div>

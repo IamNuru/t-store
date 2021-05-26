@@ -7,7 +7,7 @@ const Item = (props) => {
   const { product } = props;
 
   const addProductToCart = () => {
-    addToCart({product});
+    addToCart(product);
   };
 
   const removeProductFromCart = () => {

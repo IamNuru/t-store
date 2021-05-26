@@ -8,17 +8,20 @@ const Search = (props) => {
 
   const text = useRef("");
 
+  // Load the products
   useEffect(() => {
     getProducts();
   });
 
+  // search for products that match the text ref
   const searchItem = (e) => {
     e.preventDefault();
-    searchProducts(text.current.value);
-    //window.location.href = "/search"
     const txt = text.current.value
-    props.history.push(`/search?:txt=${txt}`)
+    searchProducts(txt);
+    props.history.push(`/search/${txt}`)
   };
+
+
   return (
     <form onSubmit={searchItem}>
       <input
