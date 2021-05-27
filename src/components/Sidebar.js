@@ -4,7 +4,7 @@ import Search from "./Search";
 
 const Sidebar = () => {
   return (
-    <div className="md:mt-20 bg-gray-200 p-2 -mt-32 z-20 w-full text-center md:w-48 md:h-screen md:h-full fixed ">
+    <div className="md:mt-20 bg-gray-200 px-2 py-1 -mt-32 z-20 w-full text-center md:w-48 md:h-screen fixed ">
         <nav className="bg-gray-100">
           <ul className="flex whitespace-nowrap overflow-auto px-8 md:px-2 md:block justify-center md:text-left">
             <li className="hover:bg-purple-400 hover:rounded-lg rounded transition duration-400 px-4 py-2 md:px-0 md:py-0">

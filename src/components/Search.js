@@ -28,7 +28,7 @@ const Search = (props) => {
         ref={text}
         type="text"
         placeholder="Search"
-        className="pl-4 mt-4 mb-8 py-2 w-full ml-1 mr-2 rounded-full border-1"
+        className="pl-2 py-2 mt-4 mb-1 md:mb-8 w-full ml-1 mr-2 rounded-full border-1"
       />
     </form>
   );

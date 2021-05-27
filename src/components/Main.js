@@ -12,7 +12,7 @@ import SearchedItem from "./SearchPage";
 const Main = () => {
 
   return (
-    <div className="md:ml-48 mt-48 md:mt-24 pl-4">
+    <div className="mt-4 md:ml-48 mt-48 md:mt-24 pl-4">
         <Switch> 
           <Route exact path="/electronics" component={Electronic} />
           <Route exact path="/men's clothing" component={MensClothing} />

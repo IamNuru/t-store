@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import CartRow from "./CartRow";
 import CartContext from "./context/cart/CartContext";
 
@@ -11,8 +11,8 @@ const Cart = () => {
     currency: "GHS",
   });
 
-  const [shippingCharge, setShippingCharge] = useState(5);
-  const [couponValue, setCouponValue] = useState(4);
+  const [shippingCharge] = useState(5);
+  const [couponValue] = useState(4);
 
   return (
     <div className="flex justify-center my-6">
