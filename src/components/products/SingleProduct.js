@@ -1,27 +1,29 @@
 import React, { useEffect, useContext } from "react";
 import ProductsContext from "../context/products/ProductsContext";
 import CartContext from "../context/cart/CartContext";
+import Item from "./womensClothing/Item"
 
 const SingleProduct = (props) => {
-  const { loading, getProduct, product } = useContext(ProductsContext);
+  const { loading, getProduct, product, getRelatedProducts, relatedProducts } = useContext(ProductsContext);
   const { cart, addToCart, removeFromCart} = useContext(CartContext);
 
   useEffect(() => {
     async function getSpecifiedProduct() {
       await getProduct(props.match.params.id);
+      await getRelatedProducts(product)
     }
-
     getSpecifiedProduct();
+    
   });
   return (
-    <div>
+    <div className="block md:flex">
       {loading !== null ? (
         product !== null ? (
-          <div className="w-full bg-purple-600 md:w-2/3">
+          <div className="w-full p-4 bg-purple-600 md:min-w-96">
             <h2 className="w-full text-center">{product.title}</h2>
-            <div className="w-full h-48 md:w-60 md:h-48">
+            <div className="h-48">
               <img src={product.image} alt="Product Image" 
-              className="w-full h-full"/>
+              className="w-full min-h-60 max-h-60 p-2"/>
             </div>
             <div className="block md:flex">
               <span className="">Price: {product.price}</span>
@@ -52,6 +54,22 @@ const SingleProduct = (props) => {
       ) : (
         "Loading"
       )}
+      <div className=" w-full p-4 min-w-48 shadow rounded-md block md:min-w-52">
+        <h2 className="font-semibold">Products you might like</h2>
+        {
+            relatedProducts !== null ? (
+                relatedProducts.length > 0 ? (
+                    relatedProducts.map( (item, index) => {
+                        return(<Item product={item} key={index} />)
+                    })
+                ) 
+                :
+                ('No related products')
+            ) 
+            : 
+            ('Loading')
+                    }
+      </div>
     </div>
   );
 };
