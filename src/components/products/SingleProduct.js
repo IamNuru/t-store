@@ -19,9 +19,9 @@ const SingleProduct = (props) => {
     <div className="block md:flex">
       {loading !== null ? (
         product !== null ? (
-          <div className="w-full p-4 bg-purple-600 md:min-w-96">
+          <div className="w-full p-4 md:min-w-96">
             <h2 className="w-full text-center">{product.title}</h2>
-            <div className="h-48">
+            <div className="mb-2 h-full block">
               <img src={product.image} alt="Product Image" 
               className="w-full min-h-60 max-h-60 p-2"/>
             </div>
