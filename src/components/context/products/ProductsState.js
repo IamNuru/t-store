@@ -11,6 +11,7 @@ import {
   GET_WOMENS_CLOTHING,
   GET_MENS_CLOTHING,
   SEARCH_PRODUCTS,
+  GET_RELATED_PRODUCTS
 } from "../types";
 
 const ProductsState = (props) => {
@@ -20,9 +21,10 @@ const ProductsState = (props) => {
     mensClothing: null,
     womensClothing: null,
     electronics: null,
+    relatedProducts: null,
     product: null,
     searchedItems:null,
-    loading: false,
+    loading: true,
   };
 
   //initialise the state
@@ -85,12 +87,29 @@ const ProductsState = (props) => {
     } catch (error) {}
   };
 
+  //get related products
+  const getRelatedProducts = async (product) => {
+    try {
+      const res = await axios.get(`https://fakestoreapi.com/products/category/${product.category}?limit=6`);
+      dispatch({
+        type: GET_RELATED_PRODUCTS,
+        payload: res.data,
+      });
+    } catch (error) {}
+  };
+
   //**get a product */
-  const getProduct = (id) => {
-    dispatch({
-      type: GET_PRODUCT,
-      payload: id,
-    });
+  const getProduct = async (id) => {
+    try {
+      const res = await axios.get(`https://fakestoreapi.com/products/${id}`)
+      dispatch({
+        type: GET_PRODUCT,
+        payload: res.data,
+      });
+    } catch (error) {
+      
+    }
+    
   };
 
   // search product
@@ -109,6 +128,7 @@ const ProductsState = (props) => {
         mensClothing: state.mensClothing,
         womensClothing: state.womensClothing,
         electronics: state.electronics,
+        relatedProducts: state.relatedProducts,
         product: state.product,
         searchedItems: state.searchedItems,
         loading: state.loading,
@@ -119,6 +139,7 @@ const ProductsState = (props) => {
         getElectronics,
         getProduct,
         searchProducts,
+        getRelatedProducts
       }}
     >
       {props.children}

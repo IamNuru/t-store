@@ -12,6 +12,7 @@ import Checkout from "./cart/Checkout";
 import SearchedItem from "./SearchPage";
 import LoginPage from "./user/LoginPage";
 import Register from "./user/Register";
+import SingleProduct from "./products/SingleProduct";
 
 
 const Main = () => {
@@ -26,6 +27,7 @@ const Main = () => {
           <Route exact path="/cart" component={Cart} />
           <ProtectedRoute exact path="/cart/checkout" component={Checkout} />
           <Route exact path="/search/:txt" component={SearchedItem} />
+          <Route exact path="/product/:id" component={SingleProduct} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/jewellery" component={Jewellery} />

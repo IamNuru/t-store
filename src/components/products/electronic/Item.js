@@ -5,6 +5,10 @@ const Item = (props) => {
   const { cart, addToCart, removeFromCart } = cartContext;
 
   const { product } = props;
+  const formatter = new Intl.NumberFormat("en-US",{
+    style:"currency",
+    currency:"GHS"
+  })
 
   const addProductToCart = () => {
     addToCart(product);
@@ -31,9 +35,8 @@ const Item = (props) => {
             {product.description}
           </p>
           <div className="mt-3 flex items-center">
-            <span className="text-sm font-semibold">ab</span>&nbsp;
-            <span className="font-bold text-xl">{product.price.toLocaleString()}</span>&nbsp;
-            <span className="text-sm font-semibold">Ghc</span>
+            <span className="font-bold text-xl">{formatter.format(product.price)}</span>&nbsp;
+            
           </div>
         </div>
         <div className="p-4 border-t border-b text-gray-700">

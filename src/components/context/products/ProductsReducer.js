@@ -6,6 +6,7 @@ import {
     GET_WOMENS_CLOTHING,
     GET_MENS_CLOTHING,
     SEARCH_PRODUCTS,
+    GET_RELATED_PRODUCTS
   } from "../types";
 
 
@@ -55,6 +56,13 @@ const ProductsReducer = (state, action) => {
             return{
                 ...state,
                 product: action.payload,
+                loading: false
+            }
+        case GET_RELATED_PRODUCTS:
+            return{
+                ...state,
+                relatedProducts: action.payload,
+                loading: false
             }
     
         default:
