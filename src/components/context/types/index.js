@@ -2,6 +2,12 @@ export const GET_PRODUCTS = "GET_PRODUCTS"
 export const GET_PRODUCT = "GET_PRODUCT"
 export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
 
+//User variable
+export const REGISTER = "REGISTER"
+export const LOGIN = "LOGIN"
+export const LOGOUT = "LOGOUT"
+export const SET_LOGIN = "SET_LOGIN"
+
 //Carts
 export const ADD_TO_CART = "ADD_TO_CART"
 export const REMOVE_FROM_CART = "REMOVE_FROM_CART"

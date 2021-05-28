@@ -17,13 +17,29 @@ const CartState = (props) => {
 
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
+  initialState.cart = initialState.cart.concat(
+    JSON.parse(window.localStorage.getItem("cart"))
+  );
   //actions
   //Add to cart
   const addToCart = (product) => {
     dispatch({
       type: ADD_TO_CART,
-      payload: Object.assign(product, {qty : 2}),
+      payload: Object.assign(product, { qty: 1 }),
     });
+
+    //Add to local storage
+    var scart = [];
+    if (localStorage.getItem("cart")) {
+      scart = JSON.parse(localStorage.getItem("cart"));
+    }
+    scart.push({
+      id: product.id,
+      image: product.image,
+      price: product.price,
+      qty: product.qty,
+    });
+    localStorage.setItem("cart", JSON.stringify(scart));
   };
 
   //Remove from cart
@@ -32,6 +48,13 @@ const CartState = (props) => {
       type: REMOVE_FROM_CART,
       payload: id,
     });
+
+    //remove from local storage
+    if (localStorage.getItem("cart")) {
+      let scart = JSON.parse(localStorage.getItem("cart"));
+      let filteredScart = scart.filter((item) => item.id !== id);
+      localStorage.setItem("cart", JSON.stringify(filteredScart));
+    }
   };
 
   //Increase cart item quantity
@@ -40,6 +63,15 @@ const CartState = (props) => {
       type: INCREASE_CART_ITEM_QTY,
       payload: id,
     });
+
+    // handle local storage
+    if (localStorage.getItem("cart")) {
+      let scart = JSON.parse(localStorage.getItem("cart"));
+      let fileredScart = scart.map((item) =>
+        item.id === id ? { ...item, qty: item.qty + 1 } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(fileredScart));
+    }
   };
 
   //decrease cart item quantity
@@ -48,15 +80,29 @@ const CartState = (props) => {
       type: DECREASE_CART_ITEM_QTY,
       payload: id,
     });
+
+    // handle local storage
+    if (localStorage.getItem("cart")) {
+      let scart = JSON.parse(localStorage.getItem("cart"));
+      let fileredScart = scart.map((item) =>
+        item.id === id ? { ...item, qty: item.qty - 1 } : item
+      );
+      localStorage.setItem("cart", JSON.stringify(fileredScart));
+    }
   };
 
-  //change 
+  //change
 
   //clear cart
   const clearCart = () => {
     dispatch({
       type: CLEAR_CART,
     });
+
+    // handle local storage
+    if (localStorage.getItem("cart")) {
+      localStorage.removeItem("cart");
+    }
   };
 
   return (

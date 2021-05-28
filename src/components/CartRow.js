@@ -35,7 +35,6 @@ const CartRow = (props) => {
       <td>
         <div>
           <p className="mb-2 md:ml-4">{item.title}</p>
-          <form action="" method="POST">
             <button type="submit" className="text-gray-700 md:ml-4">
               <small
                 onClick={() => {
@@ -45,7 +44,6 @@ const CartRow = (props) => {
                 (Remove item)
               </small>
             </button>
-          </form>
         </div>
       </td>
       <td className="justify-center md:justify-end md:flex mt-6">
