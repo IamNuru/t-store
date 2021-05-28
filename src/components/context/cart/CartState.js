@@ -17,10 +17,19 @@ const CartState = (props) => {
 
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
-  initialState.cart = initialState.cart.concat(
-    JSON.parse(window.localStorage.getItem("cart"))
-  );
+  if (localStorage.getItem("cart")) {
+    initialState.cart = initialState.cart.concat(
+      JSON.parse(localStorage.getItem("cart"))
+    );
+  }
   //actions
+  const setLocalstorage = () =>{
+    if (localStorage.getItem("cart")) {
+      initialState.cart = initialState.cart.concat(
+        JSON.parse(localStorage.getItem("cart"))
+      );
+    }
+  }
   //Add to cart
   const addToCart = (product) => {
     dispatch({
@@ -38,6 +47,7 @@ const CartState = (props) => {
       image: product.image,
       price: product.price,
       qty: product.qty,
+      title: product.title,
     });
     localStorage.setItem("cart", JSON.stringify(scart));
   };
@@ -114,6 +124,7 @@ const CartState = (props) => {
         increaseCartItemQty,
         decreaseCartItemQty,
         clearCart,
+        setLocalstorage
       }}
     >
       {props.children}
