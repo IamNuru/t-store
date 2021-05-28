@@ -34,7 +34,7 @@ const Item = (props) => {
         <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           Ghc{product.price}
         </span>
-        {cart.filter((item) => item.id === product.id).length > 0 ? (
+        {cart?.length > 0 && cart.filter((item) => item.id === product.id).length > 0 ? (
           <span
             className="cursor-pointer inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-pink-500 mr-2 mb-2"
             onClick={removeProductFromCart}

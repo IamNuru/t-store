@@ -34,7 +34,7 @@ const Item = (props) => {
           </div>
         </div>
         <div className="p-4 border-t border-b text-gray-700">
-        {cart.filter((item) => item.id === product.id).length > 0 ? (
+        {cart?.length > 0 && cart.filter((item) => item.id === product.id).length > 0 ? (
           <div onClick={removeProductFromCart} className="cursor-pointer bg-pink-200 text-pink-700 font-bold text-xl rounded w-full mx-2 px-4 text-center py-2">Remove from Cart</div>
         ) : (
           <div onClick={addProductToCart} className="cursor-pointer bg-purple-200 text-purple-700 font-bold text-xl rounded w-full mx-2 px-4 text-center py-2">Add to Cart</div>
