@@ -27,7 +27,7 @@ const Main = () => {
           <Route exact path="/cart" component={Cart} />
           <ProtectedRoute exact path="/cart/checkout" component={Checkout} />
           <Route exact path="/search/:txt" component={SearchedItem} />
-          <Route exact path="/product/:id" component={SingleProduct} />
+          <Route exact path="/product/:cat/:id" component={SingleProduct} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={Register} />
           <ProtectedRoute exact path="/jewellery" component={Jewellery} />

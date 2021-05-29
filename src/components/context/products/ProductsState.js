@@ -88,9 +88,10 @@ const ProductsState = (props) => {
   };
 
   //get related products
-  const getRelatedProducts = async (product) => {
+  const getRelatedProducts = async (cat) => {
     try {
-      const res = await axios.get(`https://fakestoreapi.com/products/category/${product.category}?limit=6`);
+      const res = await axios.get(`https://fakestoreapi.com/products/category/${cat}?limit=6`);
+      
       dispatch({
         type: GET_RELATED_PRODUCTS,
         payload: res.data,
@@ -109,7 +110,6 @@ const ProductsState = (props) => {
     } catch (error) {
       
     }
-    
   };
 
   // search product
@@ -117,6 +117,15 @@ const ProductsState = (props) => {
     dispatch({
       type: SEARCH_PRODUCTS,
       payload: text
+    })
+  }
+
+
+  // set product to null
+  const setProductToNull =() =>{
+    dispatch({
+      type: GET_PRODUCT,
+      payload: null
     })
   }
 
@@ -139,7 +148,8 @@ const ProductsState = (props) => {
         getElectronics,
         getProduct,
         searchProducts,
-        getRelatedProducts
+        getRelatedProducts,
+        setProductToNull,
       }}
     >
       {props.children}

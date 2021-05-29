@@ -1,29 +1,28 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext, useState } from "react";
 import ProductsContext from "../context/products/ProductsContext";
 import CartContext from "../context/cart/CartContext";
 import Item from "./womensClothing/Item"
 
 const SingleProduct = (props) => {
-  const { loading, getProduct, product, getRelatedProducts, relatedProducts } = useContext(ProductsContext);
-  const { cart, addToCart, removeFromCart} = useContext(CartContext);
-
+  const {setProductToNull, loading, getProduct, getProducts, product, getRelatedProducts, relatedProducts } = useContext(ProductsContext);
+  const {  cart, addToCart, removeFromCart} = useContext(CartContext);
   useEffect(() => {
-    async function getSpecifiedProduct() {
-      await getProduct(props.match.params.id);
-      await getRelatedProducts(product)
+    getProduct(props.match.params.id);
+    getRelatedProducts(props.match.params.cat);
+    return() =>{
+      setProductToNull()
     }
-    getSpecifiedProduct();
-    
-  });
+    // eslint-disable-next-line
+  },[]);
   return (
     <div className="block md:flex">
       {loading !== null ? (
         product !== null ? (
           <div className="w-full p-4 md:min-w-96">
-            <h2 className="w-full text-center">{product.title}</h2>
-            <div className="mb-2 h-full block">
-              <img src={product.image} alt="Product Image" 
-              className="w-full min-h-60 max-h-60 p-2"/>
+            <h2 className="w-full text-center font-semibold text-xl">{product.title}</h2>
+            <div className="mb-2 min-h-96 block">
+              <img src={product.image} alt={product.title}
+              className="w-full h-full p-2"/>
             </div>
             <div className="block md:flex">
               <span className="">Price: {product.price}</span>
@@ -54,7 +53,7 @@ const SingleProduct = (props) => {
       ) : (
         "Loading"
       )}
-      <div className=" w-full p-4 min-w-48 shadow rounded-md block md:min-w-52">
+      <div className="w-full p-4 md:w-96 shadow rounded-md block">
         <h2 className="font-semibold">Products you might like</h2>
         {
             relatedProducts !== null ? (
