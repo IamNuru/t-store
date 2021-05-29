@@ -31,9 +31,10 @@ const AuthState = (props) => {
   //Register user
   const register = (user) => {
     dispatch({
-      type: (REGISTER, SET_LOGIN),
+      type: (REGISTER, LOGIN),
       payload: user,
     });
+    
   };
 
   //log user in

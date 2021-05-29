@@ -1,19 +1,13 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import CartCheckOutButton from "./CartCheckOutButton";
 import CartRow from "./CartRow";
 import CartContext from "./context/cart/CartContext";
+import Formatter from "./Formatter";
+
 
 const Cart = () => {
   const cartContext = useContext(CartContext);
-  const { cart } = cartContext;
-
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "GHS",
-  });
-
-  const [shippingCharge] = useState(5);
-  const [couponValue] = useState(4);
+  const { cart, shippingCharge, couponValue } = cartContext;
 
   return (
     <div className="flex justify-center my-6">
@@ -108,7 +102,7 @@ const Cart = () => {
                     Subtotal
                   </div>
                   <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                    {formatter.format(
+                    {Formatter.format(
                       cart
                         .map((item) => item.price * item.qty)
                         .reduce(
@@ -123,7 +117,7 @@ const Cart = () => {
                     Coupon 'New customer'
                   </div>
                   <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
-                    -{couponValue}
+                    -{Formatter.format(couponValue)}
                   </div>
                 </div>
                 <div className="flex justify-between pt-4 border-b">
@@ -132,7 +126,7 @@ const Cart = () => {
                   </div>
                   <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
                     {/* substract coupon value here */}
-                    {formatter.format(
+                    {Formatter.format(
                       cart
                         .map((item) => item.price * item.qty)
                         .reduce(
@@ -147,7 +141,7 @@ const Cart = () => {
                     Shipping Charge
                   </div>
                   <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                    {formatter.format(shippingCharge)}
+                    {Formatter.format(shippingCharge)}
                   </div>
                 </div>
                 <div className="flex justify-between pt-4 border-b">
@@ -155,7 +149,7 @@ const Cart = () => {
                     Total
                   </div>
                   <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                    {formatter.format(
+                    {Formatter.format(
                       cart
                         .map((item) => item.price * item.qty)
                         .reduce(
@@ -167,8 +161,8 @@ const Cart = () => {
                     )}
                   </div>
                 </div>
-                <div className="href">
-                  <CartCheckOutButton />
+                <div >
+                  <CartCheckOutButton  />
                 </div>
               </div>
             </div>

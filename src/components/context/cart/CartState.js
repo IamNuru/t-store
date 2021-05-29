@@ -13,9 +13,17 @@ import {
 const CartState = (props) => {
   const initialState = {
     cart: [],
+    couponValue: 5,
+    shippingCharge: 15,
   };
 
   const [state, dispatch] = useReducer(CartReducer, initialState);
+
+  //format the currency value
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "GHS",
+  });
 
   if (localStorage.getItem("cart")) {
     initialState.cart = initialState.cart.concat(
@@ -119,6 +127,8 @@ const CartState = (props) => {
     <CartContext.Provider
       value={{
         cart: state.cart,
+        couponValue: state.couponValue,
+        shippingCharge: state.shippingCharge,
         addToCart,
         removeFromCart,
         increaseCartItemQty,

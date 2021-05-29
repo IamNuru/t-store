@@ -53,13 +53,14 @@ const Sidebar = () => {
                   className="px-2 inline-block w-full"
                 >
                   Login
-                </Link>
+                </Link>                
               </li>
             </div>
           ) : (
             <li className="hover:bg-purple-400 hover:rounded-md rounded transition duration-400 px-4 py-2 md:px-0 md:py-0">
               <button onClick={() => logout()} className="outline-none">Logout</button>
             </li>
+
           )}
         </ul>
       </nav>

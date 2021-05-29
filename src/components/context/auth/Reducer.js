@@ -9,7 +9,7 @@ const AuthReducer = (state, action) => {
     case REGISTER:
       return {
         ...state,
-        cart: [...state.cart, action.payload],
+        user: action.payload,
       };
 
     case LOGIN:

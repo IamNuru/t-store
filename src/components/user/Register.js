@@ -1,8 +1,8 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import AuthContext from "../context/auth/Context";
 
-const Register = () => {
+const Register = (props) => {
   const authContext = useContext(AuthContext);
   const { register, user, logedin } = authContext;
   // set state
@@ -11,6 +11,16 @@ const Register = () => {
     username: "",
     password: "",
   });
+  
+  useEffect(() => {
+    if(logedin){
+      props.history.push('/')
+    }
+
+    // eslint-disable-next-line
+  }, [logedin])
+
+
   //destructure state objects
   const { username, password } = credentials;
   //on change of inputs
