@@ -26,41 +26,41 @@ const CartRow = (props) => {
 
   return (
       props.item === null ? ('Loading') : (
-      <tr>
-      <td className="hidden pb-4 md:table-cell">
+      <tr className="border-8 border-l-4 border-r-4 border-white">
+      <td className="hidden pt-4 pb-4 md:table-cell">
         <div>
           <img src={item.image} className="w-20 rounded" alt="Thumbnail" />
         </div>
       </td>
       <td>
         <div>
-          <p className="mb-2 md:ml-4">{item.title}</p>
-            <button type="submit" className="text-gray-700 md:ml-4">
-              <small
+          <p className="md:ml-4">{item.title}</p>
+              <div className="cursor-pointer ml-4 font-semibold text-pink-600"
                 onClick={() => {
                   removeFromCart(item.id);
                 }}
               >
-                (Remove item)
-              </small>
-            </button>
+                <span className="fa fa-trash text-pink-800 px-2"></span>
+                <span className="hidden md:inline-block">Remove item</span> 
+              </div>
         </div>
       </td>
       <td className="justify-center md:justify-end md:flex mt-6">
         <div className="w-20 h-10">
-          <div className="relative flex flex-row w-full h-8">
-            <span className={"substract px-1 cursor-pointer text-pink-900 text-2xl -pt-2 mr-1 text-center "
-             + (qty < 2 && 'hidden')}
-            onClick={decrement}>-</span>
+          <div className="relative flex flex-row w-full">
+            <i className={`${qty < 2 && 'invisible'} fa fa-minus-circle p-1 text-pink-600 text-md mr-1 
+            text-center cursor-pointer bg-gray-200 rounded-full` }
+            onClick={decrement}></i>
             <input
               type="text"
               value={qty}
               disabled
               onChange={calculatePrice}
-              className="w-full font-semibold text-center text-gray-700 bg-gray-200 outline-none focus:outline-none hover:text-black focus:text-black"
+              className="w-6 font-semibold text-center text-gray-700 bg-gray-200 outline-none"
             />
-            <span className="add px-1 text-purple-900 text-2xl ml-1 text-center cursor-pointer" 
-            onClick={increment}>+</span>
+            <i className="fa fa-plus-circle p-1 text-purple-900 text-md ml-1 
+            text-center cursor-pointer bg-gray-200 rounded-full"
+            onClick={increment}></i>
           </div>
         </div>
       </td>

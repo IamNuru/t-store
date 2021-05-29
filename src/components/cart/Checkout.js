@@ -1,19 +1,17 @@
-import React, { useContext, useState } from "react";
-import AuthContext from "../context/auth/Context";
+import React, {  useState } from "react";
 import { Link } from "react-router-dom";
 import AmountToPay from "./AmountToPay";
 
-const Checkout = () => {
-  const { logedin } = useContext(AuthContext);
+const Checkout = (props) => {
 
   const [paymentMethod, setPaymentMethod] = useState("momo");
 
   const confirmOrder = (e) => {
       e.preventDefault()
       if(paymentMethod === "momo"){
-
+        props.history.push("/cart/checkout/success");
       }else if(paymentMethod === "bank"){
-
+        props.history.push("/cart/checkout/success");
       }else{
           alert("Invalid payment method")
       }

@@ -42,7 +42,7 @@ const Header = () => {
                 className="absolute -mt-4 ml-4 bg-red-400 p-1 text-xs"
                 style={{ borderRadius: "50%" }}
               >
-                {cart.length}
+                {cart === null ? 0 : cart.length}
               </div>
             </div>
           </Link>

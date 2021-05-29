@@ -1,10 +1,10 @@
-import React, { useEffect, useContext, useState } from "react";
+import React, { useEffect, useContext } from "react";
 import ProductsContext from "../context/products/ProductsContext";
 import CartContext from "../context/cart/CartContext";
 import Item from "./womensClothing/Item"
 
 const SingleProduct = (props) => {
-  const {setProductToNull, loading, getProduct, getProducts, product, getRelatedProducts, relatedProducts } = useContext(ProductsContext);
+  const {setProductToNull, loading, getProduct, product, getRelatedProducts, relatedProducts } = useContext(ProductsContext);
   const {  cart, addToCart, removeFromCart} = useContext(CartContext);
   useEffect(() => {
     getProduct(props.match.params.id);

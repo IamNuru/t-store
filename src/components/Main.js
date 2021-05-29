@@ -13,6 +13,7 @@ import SearchedItem from "./SearchPage";
 import LoginPage from "./user/LoginPage";
 import Register from "./user/Register";
 import SingleProduct from "./products/SingleProduct";
+import SuccessOrder from "./cart/SuccessOrder";
 
 
 const Main = () => {
@@ -26,6 +27,7 @@ const Main = () => {
           {/* <Route exact path="/jewellery" component={Jewellery} /> */}
           <Route exact path="/cart" component={Cart} />
           <ProtectedRoute exact path="/cart/checkout" component={Checkout} />
+          <ProtectedRoute exact path="/cart/checkout/success" component={SuccessOrder} />
           <Route exact path="/search/:txt" component={SearchedItem} />
           <Route exact path="/product/:cat/:id" component={SingleProduct} />
           <Route exact path="/login" component={LoginPage} />

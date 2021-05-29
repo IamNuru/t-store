@@ -19,12 +19,6 @@ const CartState = (props) => {
 
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
-  //format the currency value
-  const formatter = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "GHS",
-  });
-
   if (localStorage.getItem("cart")) {
     initialState.cart = initialState.cart.concat(
       JSON.parse(localStorage.getItem("cart"))

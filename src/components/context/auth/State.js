@@ -6,7 +6,6 @@ import {
   REGISTER,
   LOGIN,
   LOGOUT,
-  SET_LOGIN
 } from "../types";
 
 const AuthState = (props) => {
