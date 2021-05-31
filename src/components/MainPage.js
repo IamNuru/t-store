@@ -6,7 +6,9 @@ import WomensClothing from "./products/womensClothing/WomensClothing";
 import Electronic from "./products/electronic/Electronic";
 import { Link } from "react-router-dom";
 
-const MainPage = () => {
+const MainPage = (props) => {
+  
+
   return (
     <div className="block">
       <div className="border border-gray-300 rounded-2xl px-4 py-2 bg-gray-100 shoes mb-4">

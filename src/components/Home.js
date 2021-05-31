@@ -3,7 +3,7 @@ import Main from "./Main";
 import Sidebar from "./Sidebar";
 
 
-const Home = () => {
+const Home = (props) => {
   return (
       <div className="block md:flex">
         <Sidebar />

@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Switch, Route} from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 import ProtectedRoute from "../ProtectedRoute"
 import MainPage from './MainPage'
 import Electronic from "./products/electronic/Electronic";
@@ -16,8 +16,8 @@ import SingleProduct from "./products/SingleProduct";
 import SuccessOrder from "./cart/SuccessOrder";
 
 
-const Main = () => {
-
+const Main = (props) => {
+  
   return (
     <div className="w-full md:ml-48 mt-28 md:mt-14 px-1 md:pl-4">
         <Switch> 

@@ -25,6 +25,8 @@ const AuthState = (props) => {
   /*if (window.localStorage.getItem('user')){
     initialState.login = true 
   }*/
+
+
   
   //actions
   //Register user

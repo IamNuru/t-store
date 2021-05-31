@@ -14,6 +14,9 @@ const SettingsState = (props) => {
 
   const [state, dispatch] = useReducer(SettingsReducer, initialState);
 
+
+
+
   const toggleNavbar = () =>{
     dispatch({
       type: NAVBAR_TOGGLE,
