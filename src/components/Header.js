@@ -1,17 +1,26 @@
 import React, { useContext } from "react";
 import CartContext from "./context/cart/CartContext";
 import AuthContext from "./context/auth/Context";
+import SettingsContext from "./context/settings/SettingsContext";
 
 import { Link } from "react-router-dom";
 
 const Header = () => {
   const { logout, logedin } = useContext(AuthContext);
+  const { isNavbarOpen , closeNavbar} = useContext(SettingsContext);
   const { cart } = useContext(CartContext);
 
+  const toggleBar =() => {
+    if (isNavbarOpen === true ) {
+       closeNavbar(false)
+    }else{
+      closeNavbar(true)
+    }
+  }
   return (
-    <div className="bg-white pt-4 flex fixed w-full top-0 z-20 mb-2 shadow-md min-h-2 py-1">
+    <div className="bg-white pt-4 flex fixed w-full top-0 z-30 mb-2 shadow-md min-h-2 py-1">
       <div className="navs flex">
-        <div className="cursor-pointer ml-4 md:hidden">
+        <div id="toggler" className="z-40 cursor-pointer ml-4 md:hidden" onClick={toggleBar}>
           <div className="w-6 bg-black pb-1 mb-1"></div>
           <div className="w-6 bg-black pt-1 mb-1"></div>
           <div className="w-6 bg-black pt-1"></div>
