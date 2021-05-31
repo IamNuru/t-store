@@ -43,10 +43,10 @@ const Register = (props) => {
     register(credentials);
   };
   return (
-    <div className="p-1 block bg-gray-100 min-h-screen w-full">
+    <div className="p-1 block bg-gray-100 h-screen w-full">
       <form
         onSubmit={registerUser}
-        className="block rounded-md mt-2 min-h-screen px-4 py-8 w-full m-auto bg-gray-300 md:w-96"
+        className="block rounded-md mt-2 h-screen md:h-2/3 px-4 pt-4 pb-8 w-full m-auto md:mt-24 bg-gray-300 md:w-96"
       >
         <h2 className="w-full text-center mt-1 mb-2 font-bold text-2xl">
           Register

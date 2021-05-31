@@ -10,8 +10,15 @@ const Header = () => {
 
   return (
     <div className="bg-white pt-4 flex fixed w-full top-0 z-20 mb-2 shadow-md min-h-2 py-1">
-      <div className="navs">
-        <i className="fa fa-cart-plus text-purple-600 ml-4 text-4xl px-1"></i>
+      <div className="navs flex">
+        <div className="cursor-pointer ml-4 md:hidden">
+          <div className="w-6 bg-black pb-1 mb-1"></div>
+          <div className="w-6 bg-black pt-1 mb-1"></div>
+          <div className="w-6 bg-black pt-1"></div>
+        </div>
+        <Link to="/">
+          <i className="fa fa-cart-plus text-purple-600 ml-4 text-4xl px-1"></i>
+        </Link>
       </div>
       <div className="flex ml-auto mr-4">
         {!logedin ? (

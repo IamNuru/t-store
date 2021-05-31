@@ -3,7 +3,7 @@ import ProductsContext from '../../context/products/ProductsContext';
 
 import Item from "./Item";
 
-const Jewellery = () => {
+const Jewellery = (props) => {
 
   const productsContext = useContext(ProductsContext);
   const {jewelleries, getJewelleries } = productsContext;
@@ -12,9 +12,13 @@ const Jewellery = () => {
     getJewelleries()
     // eslint-disable-next-line
   }, [])
-
+  
   return (
+    <div>
+      <h2 className={`${window.location.href === 'http://localhost:3000/' && 'hidden'} text-center shadow-md mb-2 py-4 font-semibold text-xl font-serif w-full capitalize`}>{window.location.pathname.split('/')}</h2>
+        
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+        
         {
             jewelleries !== null ? (
                 jewelleries.length > 0 ? (
@@ -24,6 +28,7 @@ const Jewellery = () => {
                 ) : "No data"
             ):'loading...'
         }
+    </div>
     </div>
   );
 };

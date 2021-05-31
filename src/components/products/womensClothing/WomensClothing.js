@@ -14,6 +14,9 @@ const WomensClothing = () => {
   }, [])
 
   return (
+  <div>
+    <h2 className={`${window.location.href === 'http://localhost:3000/' && 'hidden'} text-center shadow-md mb-2 py-4 font-semibold text-xl font-serif w-full capitalize`}>{window.location.pathname.replace('%20',' ').split('/')}</h2>
+    
     <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
         {
             womensClothing !== null ? (
@@ -24,6 +27,7 @@ const WomensClothing = () => {
                 ) : "No data"
             ):'loading...'
         }
+    </div>
     </div>
   );
 };

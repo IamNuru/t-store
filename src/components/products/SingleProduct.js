@@ -13,7 +13,7 @@ const SingleProduct = (props) => {
       setProductToNull()
     }
     // eslint-disable-next-line
-  },[]);
+  },[props.match.params.id, props.match.params.cat]);
   return (
     <div className="block md:flex">
       {loading !== null ? (

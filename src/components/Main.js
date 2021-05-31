@@ -19,7 +19,7 @@ import SuccessOrder from "./cart/SuccessOrder";
 const Main = () => {
 
   return (
-    <div className="w-full mt-44 md:ml-48 mt-48 md:mt-14 pl-4">
+    <div className="w-full md:ml-48 mt-28 md:mt-14 px-1 md:pl-4">
         <Switch> 
           <Route exact path="/electronics" component={Electronic} />
           <Route exact path="/men's clothing" component={MensClothing} />
