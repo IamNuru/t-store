@@ -5,6 +5,8 @@ import AuthContext from "../context/auth/Context";
 const LoginPage = (props) => {
   const authContext = useContext(AuthContext);
   const { login, users, logedin } = authContext;
+
+  
   // set state
   const [stayLogedIn, setStayLogedIn] = useState(logedin)
   const [credentials, setCredentials] = useState({
@@ -12,6 +14,7 @@ const LoginPage = (props) => {
     password: "",
   });
   const [errorMsg, setErrorMsg] = useState('')
+
   
   useEffect(() => {
     if(logedin){
@@ -21,30 +24,36 @@ const LoginPage = (props) => {
     // eslint-disable-next-line
   }, [logedin])
 
+
   //destructure state objects
   const { username, password } = credentials;
+
+
   //on change of inputs
   const onChange = (e) =>{
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
     setErrorMsg('')};
   
+
   // toggle stay logged in 
   const changeStayLogedInStatus = () =>{
     setStayLogedIn(!stayLogedIn)
   }
+
+
   // log in the user
   const loginUser = (e) => {
     e.preventDefault();
-    const user = users.find(target => target.username === username && target.password === password);
+    const user = users.some(u => (u.username === username && u.password === password));
     if (username === "" || password === "") {
       setErrorMsg("Fill in your credentials");
       return false;
     }
-    else if (user.username !== username || user.password !== password) {
+    else if (!user) {
       setErrorMsg("Invalid credentials");
       return false;
     }
-    else if (user.username === username && user.password === password) {
+    else if (user) {
       login();
       var intendedLocation = props.location.state;
       if(intendedLocation === undefined){

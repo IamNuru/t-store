@@ -4,6 +4,7 @@ import {
   INCREASE_CART_ITEM_QTY,
   DECREASE_CART_ITEM_QTY,
   CLEAR_CART,
+  SET_COUPON_VALUE
 } from "../types";
 
 const CartReducer = (state, action) => {
@@ -45,6 +46,13 @@ const CartReducer = (state, action) => {
         ...state,
         cart: [],
       };
+
+    case SET_COUPON_VALUE:
+      return{
+        ...state,
+        couponValue: state.coupons[action.payload]
+      }
+
 
     default:
       return {

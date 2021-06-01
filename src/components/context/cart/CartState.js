@@ -8,11 +8,17 @@ import {
   INCREASE_CART_ITEM_QTY,
   DECREASE_CART_ITEM_QTY,
   CLEAR_CART,
+  SET_COUPON_VALUE
 } from "../types";
 
 const CartState = (props) => {
   const initialState = {
     cart: [],
+    coupons: {
+      NewComer: 5,
+      loyal: 55,
+      promo: 45,
+    },
     couponValue: 5,
     shippingCharge: 15,
   };
@@ -117,10 +123,18 @@ const CartState = (props) => {
     }
   };
 
+  const setCouponValue = (coupon) =>{
+    dispatch({
+      type: SET_COUPON_VALUE,
+      payload: coupon
+    })
+  }
+
   return (
     <CartContext.Provider
       value={{
         cart: state.cart,
+        coupons: state.coupons,
         couponValue: state.couponValue,
         shippingCharge: state.shippingCharge,
         addToCart,
@@ -128,7 +142,8 @@ const CartState = (props) => {
         increaseCartItemQty,
         decreaseCartItemQty,
         clearCart,
-        setLocalstorage
+        setLocalstorage,
+        setCouponValue
       }}
     >
       {props.children}
