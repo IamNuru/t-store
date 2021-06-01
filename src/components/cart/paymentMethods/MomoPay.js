@@ -17,7 +17,7 @@ const MomoPay = (props) => {
         else if(momoNumber.length !== 10 ){
             setFormError("Phone number must be 10 values");
         }else{
-            props.history.push("/cart/checkout/success");
+            props.directToPage.push("/cart/checkout/success");
         }
     }
     return (

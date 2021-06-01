@@ -27,7 +27,7 @@ const Bank = (props) => {
         else if(accountNumber.length > 20 ){
             setFormError("Account number cannot be more than 20");
         }else{
-            props.history.push("/cart/checkout/success");
+            props.directToPage.push("/cart/checkout/success");
         }
     }
     return (

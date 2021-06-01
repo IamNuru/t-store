@@ -41,7 +41,7 @@ const Checkout = (props) => {
           </button>
         </div>
       </div>
-      {paymentMethod === "bank" ? <Bank /> : <MomoPay />} 
+      {paymentMethod === "bank" ? <Bank directToPage={props.history}/> : <MomoPay directToPage={props.history}/>} 
       <div className="mt-8 text-center mb-4 text-sm text-gray-600">
         You can{" "}
         <Link to="/cart" className="px-1 text-purple-700">
