@@ -4,44 +4,54 @@ import AuthContext from "../context/auth/Context";
 
 const Register = (props) => {
   const authContext = useContext(AuthContext);
-  const { register, user, logedin } = authContext;
+  const { users, register, logedin } = authContext;
   // set state
-  const [stayLogedIn, setStayLogedIn] = useState(logedin)
+  const [stayLogedIn, setStayLogedIn] = useState(logedin);
   const [credentials, setCredentials] = useState({
+    fullName: "",
     username: "",
     password: "",
   });
-  
+  const [errorMsg, setErrorMsg] = useState("");
+
   useEffect(() => {
-    if(logedin){
-      props.history.push('/')
+    if (logedin) {
+      props.history.push("/");
     }
 
     // eslint-disable-next-line
-  }, [logedin])
-
+  }, [logedin]);
 
   //destructure state objects
-  const { username, password } = credentials;
+  const { fullName, username, password } = credentials;
   //on change of inputs
-  const onChange = (e) =>
+  const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    // toggle stay logged in 
-  const changeStayLogedInStatus = () =>{
-    setStayLogedIn(!stayLogedIn)
-  }
+    setErrorMsg("");
+  };
+  // toggle stay logged in
+  const changeStayLogedInStatus = () => {
+    setStayLogedIn(!stayLogedIn);
+  };
+
   // register new user
   const registerUser = (e) => {
     e.preventDefault();
+    const existingUser = users.find((user) => user.username === username);
     if (username === "" || password === "") {
-      alert("Fill in your credentials");
+      setErrorMsg("Fill in all fields");
+      return false;
+    }else if (existingUser) {
+      setErrorMsg(`Username ${existingUser.username} is already taken`);
+    } else if (!existingUser) {
+      //setLogin(credentials)
+      register(credentials);
+    } else {
+      setErrorMsg("The information provided are incorrect");
     }
-    if (user.username === username) {
-      alert("Username already taken");
-    }
-    //setLogin(credentials)
-    register(credentials);
   };
+
+
   return (
     <div className="p-1 block bg-gray-100 h-screen w-full">
       <form
@@ -51,6 +61,14 @@ const Register = (props) => {
         <h2 className="w-full text-center mt-1 mb-2 font-bold text-2xl">
           Register
         </h2>
+        <input
+          type="text"
+          name="fullName"
+          value={fullName}
+          onChange={onChange}
+          placeholder="Full Name"
+          className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
+        />
         <input
           type="text"
           name="username"
@@ -76,6 +94,14 @@ const Register = (props) => {
           />
           <label className="text-sm pl-2"> Select to stay logged in</label>
         </div>
+        {errorMsg && (
+          <p className="text-center text-red-600 text-sm py-2 italic">
+            {errorMsg}
+          </p>
+        )}
+        <p className="text-right py-2 text-purple-700">
+          <Link to="/forgotpassword">Forgot Password ?</Link>
+        </p>
         <button
           type="submit"
           className="py-1

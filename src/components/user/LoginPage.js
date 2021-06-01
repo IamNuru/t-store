@@ -4,14 +4,15 @@ import AuthContext from "../context/auth/Context";
 
 const LoginPage = (props) => {
   const authContext = useContext(AuthContext);
-  const { login, user, logedin } = authContext;
+  const { login, users, logedin } = authContext;
   // set state
   const [stayLogedIn, setStayLogedIn] = useState(logedin)
   const [credentials, setCredentials] = useState({
     username: "",
     password: "",
   });
-
+  const [errorMsg, setErrorMsg] = useState('')
+  
   useEffect(() => {
     if(logedin){
       props.history.push('/')
@@ -23,8 +24,9 @@ const LoginPage = (props) => {
   //destructure state objects
   const { username, password } = credentials;
   //on change of inputs
-  const onChange = (e) =>
+  const onChange = (e) =>{
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
+    setErrorMsg('')};
   
   // toggle stay logged in 
   const changeStayLogedInStatus = () =>{
@@ -33,27 +35,33 @@ const LoginPage = (props) => {
   // log in the user
   const loginUser = (e) => {
     e.preventDefault();
+    const user = users.find(target => target.username === username && target.password === password);
     if (username === "" || password === "") {
-      alert("Fill in your credentials");
+      setErrorMsg("Fill in your credentials");
       return false;
     }
-    if (user.username !== username) {
-      alert("Invalid credentials");
+    else if (user.username !== username || user.password !== password) {
+      setErrorMsg("Invalid credentials");
+      return false;
+    }
+    else if (user.username === username && user.password === password) {
+      login();
+      var intendedLocation = props.location.state;
+      if(intendedLocation === undefined){
+        props.history.push('/')
+      }else{
+        props.history.push(intendedLocation.from.pathname)
+      }
+    }else{
+      setErrorMsg("Authentication Fails. Try again");
       return false;
     }
     //login(credentials, stayLogedIn)
-    login();
-
-    var intendedLocation = props.location.state;
-    if(intendedLocation === undefined){
-      props.history.push('/')
-    }else{
-      props.history.push(intendedLocation.from.pathname)
-    }
+    
     
   };
   return (
-    <div className="p-1 block bg-gray-100 h-screen w-full">
+    <div className="p-1 block bg-gray-100 h-full w-full">
       <form onSubmit={loginUser} className="block rounded-md mt-2 h-2/3 md:h-2/3 px-4 pt-4 pb-8 w-full m-auto md:mt-24 bg-gray-300 md:w-96">
         <h2 className="w-full text-center mt-1 mb-2 font-bold text-xl">
         Login
@@ -83,6 +91,12 @@ const LoginPage = (props) => {
         />
         <label className="text-sm pl-2"> Select to stay logged in</label>
         </div>
+        {
+          errorMsg && <span className="text-center text-red-600 text-sm py-2 italic">{errorMsg}</span>
+        }
+        <p className="text-right py-2 text-purple-700">
+          <Link to="/forgotpassword">Forgot Password ?</Link> 
+        </p>
         <button
           type="submit"
           className="py-1 mt-4 w-full rounded-full border-1 bg-purple-600

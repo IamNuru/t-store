@@ -24,7 +24,7 @@ const SingleProduct = (props) => {
               <img src={product.image} alt={product.title}
               className="w-full h-full p-2"/>
             </div>
-            <div className="block md:flex">
+            <div className="block md:flex justify-between">
               <span className="">Price: {product.price}</span>
               {cart?.length > 0 &&
               cart.filter((item) => item.id === product.id).length > 0 ? (

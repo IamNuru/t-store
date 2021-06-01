@@ -10,7 +10,6 @@ const Header = () => {
   const { isNavbarOpen, closeNavbar } = useContext(SettingsContext);
   const { cart } = useContext(CartContext);
 
-
   const toggleBar = () => {
     if (isNavbarOpen === true) {
       closeNavbar(false);
@@ -22,18 +21,49 @@ const Header = () => {
     <div className="bg-white pt-4 flex fixed w-full top-0 z-30 mb-2 shadow-md min-h-2 py-1">
       <div className="navs flex">
         <div
-          id="toggler"
-          className="z-40 cursor-pointer ml-4 md:hidden"
           onClick={toggleBar}
+          className="z-40 cursor-pointer ml-2 md:hidden inline-flex items-center justify-center p-2 text-white bg-purple-600"
         >
-          <div className="w-6 bg-black pb-1 mb-1"></div>
-          <div className="w-6 bg-black pt-1 mb-1"></div>
-          <div className="w-6 bg-black pt-1"></div>
+          <span className="sr-only">Open main menu</span>
+
+          <svg
+            className={`${isNavbarOpen && "hidden"} h-6 w-6`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+
+          <svg
+            className={`${isNavbarOpen ? "block" : "hidden"} h-6 w-6`}
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            aria-hidden="true"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M6 18L18 6M6 6l12 12"
+            />
+          </svg>
         </div>
-        <Link to="/">
-          <i className="fa fa-cart-plus text-purple-600 ml-4 text-4xl px-1"></i>
+
+        <Link to="/" className="ml-2 text-4xl px-1">
+          <i className="fa fa-cart-plus text-purple-600"></i>
         </Link>
       </div>
+
       <div className="flex ml-auto mr-4">
         {!logedin ? (
           <div>
@@ -62,8 +92,8 @@ const Header = () => {
             </button>
           </div>
         )}
-        <Link to="/cart">
-          <div className="flex text-center ml-4">
+        <Link to="/cart"  className="px-2 ml-2">
+          <div className="flex text-center">
             <svg
               className="stroke-current text-purple-600 text-sm inline-block w-8 h-8"
               viewBox="0 0 24 24"

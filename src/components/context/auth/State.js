@@ -10,11 +10,28 @@ import {
 
 const AuthState = (props) => {
   const initialState = {
+    users:[
+      {
+        username: 'admin',
+        password: 'password',
+        fullName: 'Admin'
+      },
+      {
+        username: 'user',
+        password: 'password',
+        fullName: 'User'
+      },
+      {
+        username: 'owner',
+        password: 'password',
+        fullName: 'Owner'
+      },
+    ],
     user:
       {
         username: 'admin',
         password: 'password',
-        name: 'Administrator'
+        fullName: 'Administrator'
       },
     logedin: false,
   };
@@ -58,6 +75,7 @@ const AuthState = (props) => {
     <AuthContext.Provider
       value={{
         user: state.user,
+        users: state.users,
         logedin: state.logedin,
         login,
         register,

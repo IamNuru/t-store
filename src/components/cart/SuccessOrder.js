@@ -21,7 +21,7 @@ const SuccessOrder = () => {
         <i className="fa fa-handshake-o"></i>
       </h2>
       <p className="mt-2 mb-4">
-        Hi {user.name}, Thank you for making an order with us
+        Hi {user.fullName}, Thank you for making an order with us
       </p>
       <p className="my-4">
         Your Order Number is <span className="text-pink-600">1144586665</span>
