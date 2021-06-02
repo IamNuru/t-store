@@ -6,6 +6,8 @@ import {
   REGISTER,
   LOGIN,
   LOGOUT,
+  UPDATE_PASSWORD,
+  ADD_TO_ORDERS,
 } from "../types";
 
 const AuthState = (props) => {
@@ -33,6 +35,8 @@ const AuthState = (props) => {
         password: 'password',
         fullName: 'Administrator'
       },
+    orders:[],
+
     logedin: false,
   };
 
@@ -70,6 +74,24 @@ const AuthState = (props) => {
       type: LOGOUT,
     });
   };
+  
+
+  //log user out
+  const updatePassword = (credentials) => {
+    dispatch({
+      type: UPDATE_PASSWORD,
+      payload: credentials.newPassword
+    });
+  };
+
+
+  //add to order
+  const addToOrders = (product) => {
+    dispatch({
+      type: ADD_TO_ORDERS,
+      payload: product,
+    });
+  }
 
   return (
     <AuthContext.Provider
@@ -77,9 +99,12 @@ const AuthState = (props) => {
         user: state.user,
         users: state.users,
         logedin: state.logedin,
+        orders: state.orders,
         login,
         register,
         logout,
+        updatePassword,
+        addToOrders
       }}
     >
       {props.children}

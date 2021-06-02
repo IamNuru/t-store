@@ -42,7 +42,7 @@ const Item = (props) => {
           <div className="py-1 font-semibold text-md px-1">{product.title}</div>
         </Link>
 
-        <div className="px-6 pt-2 pb-2 flex justify-between">
+        <div className="px-2 pt-2 pb-2 flex items-center">
           <span className="whitespace-nowrap inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
             {formatter.format(product.price)}
           </span>

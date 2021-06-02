@@ -1,5 +1,6 @@
 import Home from "./components/Home";
 import Header from "./components/Header";
+import Footer from "./components/Footer";
 import ProductsState from "./components/context/products/ProductsState";
 import CartState from "./components/context/cart/CartState";
 import AuthState from "./components/context/auth/State";
@@ -15,9 +16,10 @@ function App() {
           <SettingsState>
             <div className="App">
               <Router>
-                <div className="block">
+                <div className="block h-full">
                   <Header />
                   <Home />
+                  <Footer />
                 </div>
               </Router>
             </div>

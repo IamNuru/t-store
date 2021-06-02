@@ -14,6 +14,9 @@ const Cart = () => {
     <div className="flex justify-center my-6">
       {cart.length < 1 ? (
         <p className="text-center">
+          <div className="mt-8 mb-2">
+            <i className="fa fa-cart text-gray-400 text-7xl"></i>
+          </div>
           <p className="text-red-800 text-md">
             Whoops!!! It looks like your cart is currently Empty.
           </p>

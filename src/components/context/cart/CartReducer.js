@@ -4,7 +4,9 @@ import {
   INCREASE_CART_ITEM_QTY,
   DECREASE_CART_ITEM_QTY,
   CLEAR_CART,
-  SET_COUPON_VALUE
+  SET_COUPON_VALUE,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST
 } from "../types";
 
 const CartReducer = (state, action) => {
@@ -20,6 +22,19 @@ const CartReducer = (state, action) => {
       return {
         ...state,
         cart: state.cart.filter((item) => item.id !== action.payload),
+      };
+
+    case ADD_TO_WISHLIST:
+      return {
+        ...state,
+        wishList: [...state.wishList, action.payload],
+      };
+
+
+    case REMOVE_FROM_WISHLIST:
+      return {
+        ...state,
+        wishList: state.wishList.filter((item) => item.id !== action.payload),
       };
 
 

@@ -4,7 +4,7 @@ import CartContext from "../../context/cart/CartContext";
 
 const Item = (props) => {
   const cartContext = useContext(CartContext);
-  const { cart, addToCart, removeFromCart } = cartContext;
+  const { cart, addToCart, removeFromCart, addToWishList, removeFromWishList } = cartContext;
 
   const { product } = props;
   const formatter = new Intl.NumberFormat("en-US", {
@@ -34,9 +34,23 @@ const Item = (props) => {
         </Link>
       </div>
       <div className="px-6 pt-2 pb-2">
-        <span className="rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2">
+        {
+          cart?.length > 0 &&
+          cart.filter((item) => item.id === product.id).length > 0 ? (
+        <span  className="rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
+          onClick={() => addToWishList(product)}>
           &#128155;
         </span>
+        )
+        :
+        (
+          <span  className="p-2 bg-purple-300 rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
+          onClick={() => removeFromWishList(product)}>
+          &#128155;
+        </span>
+        )
+        }
+        
         <span className="whitespace-nowrap inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
           {formatter.format(product.price)}
         </span>

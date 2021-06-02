@@ -7,6 +7,8 @@ export const REGISTER = "REGISTER"
 export const LOGIN = "LOGIN"
 export const LOGOUT = "LOGOUT"
 export const SET_LOGIN = "SET_LOGIN"
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD"
+export const ADD_TO_ORDERS = "ADD_TO_ORDERS"
 
 //Carts
 export const ADD_TO_CART = "ADD_TO_CART"
@@ -15,6 +17,10 @@ export const INCREASE_CART_ITEM_QTY = "INCREASE_CART_ITEM_QTY"
 export const DECREASE_CART_ITEM_QTY = "DEREASE_CART_ITEM_QTY"
 export const CLEAR_CART = "CLEAR_CART"
 export const SET_COUPON_VALUE = "SET_COUPON_VALUE"
+
+//Wish List
+export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST"
+export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST"
 
 //categories
 export const GET_WOMENS_CLOTHING = "GET_WOMENS_CLOTHING"

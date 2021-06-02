@@ -18,21 +18,21 @@ const MainPage = (props) => {
         <Jewellery />
       </div>
 
-      <div className="bg-pink-100 p-2 shirts mb-4">
+      <div className="mt-2 bg-pink-100 p-2 shirts mb-4">
         <h2 className="mb-1 font-serif font-bold text-xl ml-1 capitalize py-1 pl-2 bg-gradient-to-r from-pink-200 to-gray-300">
           <Link to="/men's clothing"> Mens Clothing</Link>
         </h2>
         <MensClothing />
       </div>
 
-      <div className="p-2 mb-4">
+      <div className="mt-2 p-2 mb-4">
         <h2 className="mb-1 font-serif font-bold text-xl ml-1 capitalize py-1 pl-2 bg-gradient-to-r from-pink-200 to-gray-300">
           <Link to="/women's clothing"> Womens Clothing</Link>
         </h2>
         <WomensClothing />
       </div>
 
-      <div className="technology mb-2">
+      <div className="mt-2 mb-2">
         <h2 className="mb-1 font-serif font-bold text-xl ml-1 capitalize py-1 pl-2 bg-gradient-to-r from-pink-200 to-gray-300">
           <Link to="/electronics">Electronics</Link>
         </h2>

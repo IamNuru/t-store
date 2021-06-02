@@ -8,12 +8,15 @@ import {
   INCREASE_CART_ITEM_QTY,
   DECREASE_CART_ITEM_QTY,
   CLEAR_CART,
-  SET_COUPON_VALUE
+  SET_COUPON_VALUE,
+  ADD_TO_WISHLIST,
+  REMOVE_FROM_WISHLIST
 } from "../types";
 
 const CartState = (props) => {
   const initialState = {
     cart: [],
+    wishList:[],
     coupons: {
       NewComer: 5,
       loyal: 55,
@@ -72,6 +75,43 @@ const CartState = (props) => {
       let scart = JSON.parse(localStorage.getItem("cart"));
       let filteredScart = scart.filter((item) => item.id !== id);
       localStorage.setItem("cart", JSON.stringify(filteredScart));
+    }
+  };
+
+  //Add to wish list
+  const addToWishList = (product) => {
+    dispatch({
+      type: ADD_TO_WISHLIST,
+      payload: Object.assign(product, { qty: 1 }),
+    });
+
+    //Add to local storage
+    var swishList = [];
+    if (localStorage.getItem("wishList")) {
+      swishList = JSON.parse(localStorage.getItem("wishList"));
+    }
+    swishList.push({
+      id: product.id,
+      image: product.image,
+      price: product.price,
+      qty: product.qty,
+      title: product.title,
+    });
+    localStorage.setItem("wishList", JSON.stringify(swishList));
+  };
+
+  //Remove item from wish list
+  const removeFromWishList = (id) => {
+    dispatch({
+      type: REMOVE_FROM_WISHLIST,
+      payload: id,
+    });
+
+    //remove wish list item from local storage
+    if (localStorage.getItem("wishList")) {
+      let swishList = JSON.parse(localStorage.getItem("wishList"));
+      let filteredSwishList = swishList.filter((item) => item.id !== id);
+      localStorage.setItem("wishList", JSON.stringify(filteredSwishList));
     }
   };
 
@@ -134,11 +174,14 @@ const CartState = (props) => {
     <CartContext.Provider
       value={{
         cart: state.cart,
+        wishList: state.wishList,
         coupons: state.coupons,
         couponValue: state.couponValue,
         shippingCharge: state.shippingCharge,
         addToCart,
         removeFromCart,
+        addToWishList,
+        removeFromWishList,
         increaseCartItemQty,
         decreaseCartItemQty,
         clearCart,

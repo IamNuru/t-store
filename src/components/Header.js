@@ -80,7 +80,7 @@ const Header = () => {
           </div>
         ) : (
           <div>
-            <Link to="/profile" className="px-2 py-1 font-3xl" title="profiile">
+            <Link to="/account" className="px-2 py-1 font-3xl" title="profiile">
               <i className="fa fa-user-circle"></i>
             </Link>
             <button

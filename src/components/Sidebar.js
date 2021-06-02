@@ -88,7 +88,7 @@ const Sidebar = (props) => {
     {/* <div onClick={onMobileNavClick} id="mobile-nav" className={`${!isNavbarOpen ? 'invisible opacity-0' : 'visible opacity-full'} md:hidden transition-all duration-1000 -mt-14 bg-gray-200 px-2 py-1 z-20 w-72 h-screen fixed`}> */}
     <div onClick={onMobileNavClick} id="cover" className={`${!isNavbarOpen ? 'w-0' : 'w-full'} fixed transition-all duration-300 z-20 -mt-14 h-screen bg-black bg-opacity-25`}>
     <div id="mobile-nav" className={`${!isNavbarOpen ? '-ml-60' : 'w-60'} transition-all duration-700 md:hidden bg-gray-200 px-1 py-1 z-40 h-screen`}>
-      <nav id="mobile-navs" className="block z-50">
+      <nav id="mobile-navs" className="block z-40">
         <ul className="block whitespace-nowrap overflow-auto px-1">
           <li className="hover:bg-purple-400 transition duration-400 py-2">
             <Link to="/" className="px-2 inline-block w-full">

@@ -1,7 +1,9 @@
 import {
   REGISTER,
   LOGIN,
-  LOGOUT
+  LOGOUT,
+  UPDATE_PASSWORD,
+  ADD_TO_ORDERS
 } from "../types";
 
 const AuthReducer = (state, action) => {
@@ -23,6 +25,18 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         logedin: false
+      };
+
+    case UPDATE_PASSWORD:
+      return {
+        ...state,
+        user: state.user.password = action.payload
+      };
+
+    case ADD_TO_ORDERS:
+      return {
+        ...state,
+        orders: [...state.orders, action.payload]
       };
 
     default:

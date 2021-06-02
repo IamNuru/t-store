@@ -1,8 +1,8 @@
 import React from "react";
 
 import { Switch, Route } from "react-router-dom";
-import ProtectedRoute from "../ProtectedRoute"
-import MainPage from './MainPage'
+import ProtectedRoute from "../ProtectedRoute";
+import MainPage from "./MainPage";
 import Electronic from "./products/electronic/Electronic";
 import MensClothing from "./products/mensClothing/MensClothing";
 import WomensClothing from "./products/womensClothing/WomensClothing";
@@ -14,27 +14,35 @@ import LoginPage from "./user/LoginPage";
 import Register from "./user/Register";
 import SingleProduct from "./products/SingleProduct";
 import SuccessOrder from "./cart/SuccessOrder";
-
+import Sidebar from "./Sidebar";
 
 const Main = (props) => {
-  
   return (
-    <div className="w-full md:ml-48 mt-28 md:mt-14 px-1 md:pl-4">
-        <Switch> 
+    <div className="block md:flex">
+      <>
+        <Sidebar />
+      </>
+      <div className="w-full md:ml-48 mt-28 md:mt-14 px-1 md:pl-4">
+        <Switch>
           <Route exact path="/electronics" component={Electronic} />
           <Route exact path="/men's clothing" component={MensClothing} />
           <Route exact path="/women's clothing" component={WomensClothing} />
           {/* <Route exact path="/jewellery" component={Jewellery} /> */}
           <Route exact path="/cart" component={Cart} />
           <ProtectedRoute exact path="/cart/checkout" component={Checkout} />
-          <ProtectedRoute exact path="/cart/checkout/success" component={SuccessOrder} />
+          <ProtectedRoute
+            exact
+            path="/cart/checkout/success"
+            component={SuccessOrder}
+          />
           <Route exact path="/search/:txt" component={SearchedItem} />
           <Route exact path="/product/:cat/:id" component={SingleProduct} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={Register} />
-          <ProtectedRoute exact path="/jewellery" component={Jewellery} />
+          <Route exact path="/jewellery" component={Jewellery} />
           <Route path="/" component={MainPage} />
         </Switch>
+      </div>
     </div>
   );
 };
