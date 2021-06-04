@@ -25,7 +25,7 @@ const Sidebar = (props) => {
   }
   return (
     <Fragment>
-    <div className="pb-8 transition-all duration-1000 -mt-14 md:mt-16 bg-white md:shadow-2xl px-2 py-2 z-20 w-full text-center md:w-48 md:h-screen fixed">
+    <div className="md:pb-8 transition-all duration-1000 -mt-14 md:mt-16 bg-white md:shadow-2xl px-2 py-2 z-20 w-full text-center md:w-48 md:h-screen fixed">
       <nav className="hidden md:block">
         <ul className="border-b pb-6 block whitespace-nowrap overflow-auto justify-center text-left">
           <li className={`${pathname==='/' && 'text-red-600 ml-2'} text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}>
@@ -88,7 +88,7 @@ const Sidebar = (props) => {
     {/* Mobile view navs */}
     {/* <div onClick={onMobileNavClick} id="mobile-nav" className={`${!isNavbarOpen ? 'invisible opacity-0' : 'visible opacity-full'} md:hidden transition-all duration-1000 -mt-14 bg-gray-200 px-2 py-1 z-20 w-72 h-screen fixed`}> */}
     <div onClick={onMobileNavClick} id="cover" className={`${!isNavbarOpen ? 'w-0' : 'w-full'} md:hidden fixed transition-all duration-300 z-20 -mt-14 h-screen bg-black bg-opacity-25`}>
-    <div id="mobile-nav" className={`${!isNavbarOpen ? '-ml-60' : 'w-60'} transition-all duration-700 md:hidden bg-white px-1 py-1 z-40 h-screen`}>
+    <div id="mobile-nav" className={`${!isNavbarOpen ? '-ml-60' : 'w-60'} transition-all duration-700 md:hidden bg-white px-1 z-40 h-screen`}>
       <nav id="mobile-navs" className="block z-40">
         <ul className="block whitespace-nowrap overflow-auto px-1">
           <li className="hover:bg-purple-400 transition duration-400 py-2">

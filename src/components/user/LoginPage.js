@@ -71,7 +71,7 @@ const LoginPage = (props) => {
     
   };
   return (
-    <div className="p-1 block bg-gray-100 h-full w-full">
+    <div className="mt-1 p-1 block bg-gray-100 h-full w-full">
     <div className="block shadow-2xl pb-2 w-full m-auto md:mt-24 md:w-96">
       
       <div className="block bg-black w-full h-24 text-white">

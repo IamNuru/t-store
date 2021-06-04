@@ -33,7 +33,7 @@ const Search = (props) => {
         ref={text}
         type="text"
         placeholder="Search"
-        className="pl-2 py-1.5 md:mt-4 mb-1 md:mb-8 w-full mr-2 rounded-full border border-gray-300 focus:border-purple-300 outline-none"
+        className="pl-2 py-1.5 md:mt-4 md:mb-8 w-full mr-2 rounded-full border border-gray-300 focus:border-purple-300 outline-none"
       />
     </form>
   );
