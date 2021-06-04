@@ -11,27 +11,34 @@ const AuthReducer = (state, action) => {
     case REGISTER:
       return {
         ...state,
-        user: action.payload,
         users: [...state.users, action.payload],
+        user: action.payload,
+        logedin: true
       };
 
     case LOGIN:
       return {
         ...state,
+        user: action.payload,
         logedin: true
       };
 
     case LOGOUT:
       return {
         ...state,
-        logedin: false
+        logedin: false,
+        user: null
       };
 
     case UPDATE_PASSWORD:
       return {
         ...state,
-        user: state.user.password = action.payload
+        user: {...state.user, password:action.payload.newPassword},
+        /* user: {...state, user: {...state.user, password:action.payload.newPassword}}, */
+        users: [...state.users.map((u) => 
+        u.username === state.user.username ? {...u, password:action.payload.newPassword} : u)]
       };
+      
 
     case ADD_TO_ORDERS:
       return {

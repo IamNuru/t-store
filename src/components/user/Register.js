@@ -46,6 +46,7 @@ const Register = (props) => {
     } else if (!existingUser) {
       //setLogin(credentials)
       register(credentials);
+      console.log(credentials);
     } else {
       setErrorMsg("The information provided are incorrect");
     }
@@ -67,6 +68,7 @@ const Register = (props) => {
           value={fullName}
           onChange={onChange}
           placeholder="Full Name"
+          autoComplete='off'
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
         />
         <input
@@ -74,6 +76,7 @@ const Register = (props) => {
           name="username"
           value={username}
           onChange={onChange}
+          autoComplete='off'
           placeholder="Enter username / email"
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
         />

@@ -14,14 +14,14 @@ function App() {
       <ProductsState>
         <CartState>
           <SettingsState>
-            <div className="App">
+            <div className="App block">
               <Router>
-                <div className="block h-full">
+                <div className="block min-h-screen">
                   <Header />
                   <Home />
-                  <Footer />
                 </div>
               </Router>
+                <Footer />
             </div>
           </SettingsState>
         </CartState>

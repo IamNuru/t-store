@@ -10,7 +10,7 @@ const ProfileMain = () => {
   const history = useHistory();
   return (
     <div className="block">
-      <div className="hidden md:block block w-48 mt-14">
+      <div className="block block w-48 mt-14">
         <h2 className="text-center font-bold text-2xl py-2">Account</h2>
       </div>
       <div className="w-full shadow-md mb-2">

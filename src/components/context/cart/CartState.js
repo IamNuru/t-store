@@ -29,8 +29,15 @@ const CartState = (props) => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
   if (localStorage.getItem("cart")) {
+    localStorage.clear()
     initialState.cart = initialState.cart.concat(
       JSON.parse(localStorage.getItem("cart"))
+    );
+  }
+  if (localStorage.getItem("wishList")) {
+    localStorage.clear()
+    initialState.cart = initialState.cart.concat(
+      JSON.parse(localStorage.getItem("wishList"))
     );
   }
   //actions
@@ -82,7 +89,7 @@ const CartState = (props) => {
   const addToWishList = (product) => {
     dispatch({
       type: ADD_TO_WISHLIST,
-      payload: Object.assign(product, { qty: 1 }),
+      payload: product,
     });
 
     //Add to local storage

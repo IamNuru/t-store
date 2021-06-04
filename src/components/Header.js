@@ -75,7 +75,7 @@ const Header = () => {
               <i className="fa fa-user-plus"></i>
             </Link>
             <Link to="/login" className="px-2 py-1 font-3xl" title="sign in">
-              <i className="fa fa-sign-in-alt"></i>
+              <i className="fa fa-sign-in"></i>
             </Link>
           </div>
         ) : (
@@ -88,7 +88,7 @@ const Header = () => {
               className="px-1 py-2 font-3xl"
               title="Logout"
             >
-              <i className="fa fa-sign-out-alt"></i>
+              <i className="fa fa-sign-out"></i>
             </button>
           </div>
         )}

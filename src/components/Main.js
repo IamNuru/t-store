@@ -18,7 +18,7 @@ import Sidebar from "./Sidebar";
 
 const Main = (props) => {
   return (
-    <div className="block md:flex">
+    <div className="block md:flex h-full">
       <>
         <Sidebar />
       </>

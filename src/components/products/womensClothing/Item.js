@@ -4,7 +4,7 @@ import CartContext from "../../context/cart/CartContext";
 
 const Item = (props) => {
   const cartContext = useContext(CartContext);
-  const { cart, addToCart, removeFromCart, addToWishList, removeFromWishList } = cartContext;
+  const { cart, addToCart, wishList, removeFromCart, addToWishList, removeFromWishList } = cartContext;
 
   const { product } = props;
   const formatter = new Intl.NumberFormat("en-US", {
@@ -18,6 +18,14 @@ const Item = (props) => {
 
   const removeProductFromCart = () => {
     removeFromCart(product.id);
+  };
+
+  const addProductToWishList = () => {
+    addToWishList(product);
+  };
+
+  const removeProductFromWishList = () => {
+    removeFromWishList(product.id);
   };
   return (
     <div className="rounded overflow-hidden shadow-lg">
@@ -35,17 +43,17 @@ const Item = (props) => {
       </div>
       <div className="px-6 pt-2 pb-2">
         {
-          cart?.length > 0 &&
-          cart.filter((item) => item.id === product.id).length > 0 ? (
-        <span  className="rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
-          onClick={() => addToWishList(product)}>
+          wishList.length > 0 && 
+          wishList.some((wli) => wli.id === product.id) ? (
+        <span  className="cursor-pointer p-2 bg-purple-700 rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
+          onClick={removeProductFromWishList}>
           &#128155;
         </span>
         )
         :
         (
-          <span  className="p-2 bg-purple-300 rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
-          onClick={() => removeFromWishList(product)}>
+          <span  className="cursor-pointer p-2 rounded-full px-1 py-1 text-sm font-semibold mr-2 mb-2"
+          onClick={addProductToWishList}>
           &#128155;
         </span>
         )

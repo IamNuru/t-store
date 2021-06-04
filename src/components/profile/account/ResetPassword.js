@@ -32,15 +32,16 @@ const ResetPassword = (props) => {
   // Change Password
   const changePassword = (e) => {
     e.preventDefault();
-    const correctPassword = user.some((user) => user.password === password);
+    
     if (password === "" || newPassword === "" || confirmNewPassword === "") {
       setErrorMsg("Fill in all fields");
       return false;
-    }else if (!correctPassword) {
+    }else if (user.password !== password) {
       setErrorMsg(`You've Entered a wrong password`);
-    } else if (correctPassword) {
+    } else if (user.password === password) {
       //setLogin(credentials)
       updatePassword(credentials);
+      props.history.push('/account')
     } else {
       setErrorMsg("The information provided are incorrect");
     }
@@ -61,6 +62,7 @@ const ResetPassword = (props) => {
           name="password"
           value={password}
           onChange={onChange}
+          autoComplete='off'
           placeholder="Enter existing password"
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
         />
@@ -71,6 +73,7 @@ const ResetPassword = (props) => {
           onChange={onChange}
           placeholder="Enter New Password"
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
+          autoComplete='off'
         />
         <input
           type="password"

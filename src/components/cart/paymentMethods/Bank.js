@@ -34,7 +34,7 @@ const Bank = (props) => {
       setFormError("Account number cannot be more than 20");
     } else {
       cart.map(ca =>{
-        addToOrders(ca)
+        return addToOrders(ca)
       })
       props.directToPage.push("/cart/checkout/success");
     }

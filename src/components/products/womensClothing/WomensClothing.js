@@ -37,8 +37,8 @@ const WomensClothing = () => {
         <div className="block">
           <h2 className="font-semibold py-2 pl-1 text-xl">Wish List</h2>
           <div className="block md:flex">
-            {wishList.map((wish) => {
-              <Item product={wish} />;
+            {wishList.map((wish, index) => {
+              return <Item product={wish} key={index}/>;
             })}
           </div>
         </div>

@@ -17,6 +17,10 @@ const Search = (props) => {
   const searchItem = (e) => {
     e.preventDefault();
     const txt = text.current.value
+    if (txt === '') {
+      alert (' Please enter something')
+      return false;
+    }
     searchProducts(txt);
     props.history.push(`/search/${txt}`)
   };
@@ -25,10 +29,11 @@ const Search = (props) => {
   return (
     <form onSubmit={searchItem}>
       <input
+        required
         ref={text}
         type="text"
         placeholder="Search"
-        className="pl-2 py-2 md:mt-4 mb-1 md:mb-8 w-full ml-1 mr-2 rounded-full border-1"
+        className="pl-2 py-1.5 md:mt-4 mb-1 md:mb-8 w-full mr-2 rounded-full border border-gray-300 focus:border-purple-300 outline-none"
       />
     </form>
   );

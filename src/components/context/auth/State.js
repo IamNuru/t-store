@@ -29,12 +29,7 @@ const AuthState = (props) => {
         fullName: 'Owner'
       },
     ],
-    user:
-      {
-        username: 'admin',
-        password: 'password',
-        fullName: 'Administrator'
-      },
+    user:null,
     orders:[],
 
     logedin: false,
@@ -51,18 +46,19 @@ const AuthState = (props) => {
   
   //actions
   //Register user
-  const register = (user) => {
+  const register = (comini) => {
     dispatch({
-      type: (REGISTER, LOGIN),
-      payload: user,
+      type: REGISTER,
+      payload: comini,
     });
     
   };
 
   //log user in
-  const login = () => {
+  const login = (u) => {
     dispatch({
       type: LOGIN,
+      payload:u
     });
   };
 
@@ -80,9 +76,10 @@ const AuthState = (props) => {
   const updatePassword = (credentials) => {
     dispatch({
       type: UPDATE_PASSWORD,
-      payload: credentials.newPassword
+      payload: credentials
     });
-  };
+  }
+  ;
 
 
   //add to order
