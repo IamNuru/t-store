@@ -4,49 +4,48 @@ import AuthContext from "../../context/auth/Context";
 
 const ResetPassword = (props) => {
   const authContext = useContext(AuthContext);
-  const { user, logedin, updatePassword } = authContext;
+  const { clearMessages, logedin, updatePassword, errors, setError, success } = authContext;
   // set state
   const [credentials, setCredentials] = useState({
     password: "",
-    newPassword: "",
-    confirmNewPassword: "",
+    newpassword: "",
+    newpassword_confirmation: "",
   });
-  const [errorMsg, setErrorMsg] = useState("");
 
   useEffect(() => {
     if (!logedin) {
       props.history.push("/login");
     }
-
+    return () => {
+      clearMessages()
+    }
     // eslint-disable-next-line
   }, [logedin]);
 
   //destructure state objects
-  const { password, newPassword, confirmNewPassword } = credentials;
+  const { password, newpassword, newpassword_confirmation } = credentials;
   //on change of inputs
   const onChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    setErrorMsg("");
+    clearMessages();
   };
 
   // Change Password
   const changePassword = (e) => {
     e.preventDefault();
-    
-    if (password === "" || newPassword === "" || confirmNewPassword === "") {
-      setErrorMsg("Fill in all fields");
+
+    if (
+      password === "" ||
+      newpassword === "" ||
+      newpassword_confirmation === ""
+    ) {
+      setError("Fill in all fields");
       return false;
-    }else if (user.password !== password) {
-      setErrorMsg(`You've Entered a wrong password`);
-    } else if (user.password === password) {
+    } else {
       //setLogin(credentials)
       updatePassword(credentials);
-      props.history.push('/account')
-    } else {
-      setErrorMsg("The information provided are incorrect");
     }
   };
-
 
   return (
     <div className="p-1 block bg-gray-100 min-h-96 w-full">
@@ -62,30 +61,37 @@ const ResetPassword = (props) => {
           name="password"
           value={password}
           onChange={onChange}
-          autoComplete='off'
+          autoComplete="off"
           placeholder="Enter existing password"
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
         />
         <input
           type="password"
-          name="newPassword"
-          value={newPassword}
+          name="newpassword"
+          value={newpassword}
           onChange={onChange}
           placeholder="Enter New Password"
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
-          autoComplete='off'
+          autoComplete="off"
         />
         <input
           type="password"
-          name="confirmNewPassword"
-          value={confirmNewPassword}
-          placeholder={'confirm new password'}
+          name="newpassword_confirmation"
+          value={newpassword_confirmation}
+          placeholder={"confirm new password"}
           onChange={onChange}
           className="pl-2 py-2 mt-2 w-full rounded-full border-1 outline-none"
         />
-        {errorMsg && (
-          <p className="text-center text-red-600 text-sm py-2 italic">
-            {errorMsg}
+        {errors !== null
+          ? errors.length > 0 && (
+              <p className="text-center text-red-600 text-sm py-2 italic">
+                {errors}
+              </p>
+            )
+          : ""}
+        {success !== null && (
+          <p className="text-center text-green-600 text-sm py-2 italic">
+            {success}
           </p>
         )}
         <p className="text-right py-2 text-purple-700">

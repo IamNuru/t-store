@@ -1,6 +1,6 @@
 import Home from "./components/Home";
-import Header from "./components/Header";
 import Footer from "./components/Footer";
+import HelpLink from "./components/HelpLink";
 import ProductsState from "./components/context/products/ProductsState";
 import CartState from "./components/context/cart/CartState";
 import AuthState from "./components/context/auth/State";
@@ -17,11 +17,11 @@ function App() {
             <div className="App block">
               <Router>
                 <div className="block min-h-screen">
-                  <Header />
                   <Home />
                 </div>
-              </Router>
                 <Footer />
+                <HelpLink />
+              </Router>
             </div>
           </SettingsState>
         </CartState>

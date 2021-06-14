@@ -1,75 +1,140 @@
 import {
-    GET_PRODUCTS,
-    GET_PRODUCT,
-    GET_ELECTRONICS,
-    GET_JEWELLERIES,
-    GET_WOMENS_CLOTHING,
-    GET_MENS_CLOTHING,
-    SEARCH_PRODUCTS,
-    GET_RELATED_PRODUCTS
-  } from "../types";
-
+  ADD_PRODUCT,
+  UPDATE_PRODUCT,
+  DELETE_PRODUCT,
+  ADD_CATEGORY,
+  UPDATE_CATEGORY,
+  DELETE_CATEGORY,
+  GET_PRODUCTS,
+  GET_PRODUCT,
+  GET_CATEGORY,
+  GET_CATEGORIES,
+  GET_ELECTRONICS,
+  GET_SHOES,
+  GET_CLOTHINGS,
+  SEARCH_PRODUCTS,
+  GET_CATEGORY_PRODUCTS,
+  GET_RELATED_PRODUCTS,
+  ERRORS,
+  CLEAR_MESSAGES,
+  CLEAR_ERRORS,
+} from "../types";
 
 const ProductsReducer = (state, action) => {
-    switch (action.type) {
-        case GET_PRODUCTS:
-            return  {
-                ...state,
-                products: action.payload,
-                loading: false
-            };
-        case GET_JEWELLERIES:
-            return  {
-                ...state,
-                jewelleries: action.payload,
-                loading: false
-            };
-        case GET_MENS_CLOTHING:
-            return  {
-                ...state,
-                mensClothing: action.payload,
-                loading: false
-            };
-        case GET_WOMENS_CLOTHING:
-            return  {
-                ...state,
-                womensClothing: action.payload,
-                loading: false
-            };
-        case GET_ELECTRONICS:
-            return  {
-                ...state,
-                electronics: action.payload,
-                loading: false
-            };
-        case SEARCH_PRODUCTS:
-            return {
-                ...state,
-                searchedItems: state.products.filter((product) => {
-                    const regex = new RegExp(`${action.payload}`, 'gi');
-                    return(
-                        product.title.match(regex) || product.description.match(regex) || product.category.match(regex)
-                    )
-                })
-            }
-        case GET_PRODUCT:
-            return{
-                ...state,
-                product: action.payload,
-                loading: false
-            }
-        case GET_RELATED_PRODUCTS:
-            return{
-                ...state,
-                relatedProducts: action.payload,
-                loading: false
-            }
-    
-        default:
-            return{
-                ...state
-            }
-    }
-}
+  switch (action.type) {
+    case ADD_PRODUCT:
+    case UPDATE_PRODUCT:
+    case DELETE_PRODUCT:
+      return {
+        ...state,
+        success: action.payload,
+        errors: null,
+      };
+    case ADD_CATEGORY:
+    case UPDATE_CATEGORY:
+    case DELETE_CATEGORY:
+      return {
+        ...state,
+        success: action.payload,
+        errors: null,
+      };
 
-export default ProductsReducer
+    case GET_CATEGORIES:
+      return {
+        ...state,
+        categories: action.payload,
+      };
+    case GET_PRODUCTS:
+    case GET_CATEGORY_PRODUCTS:
+      return {
+        ...state,
+        products: action.payload,
+        loading: false,
+      };
+    case GET_SHOES:
+      return {
+        ...state,
+        shoes: action.payload,
+        loading: false,
+        errors: null,
+        success: null,
+      };
+    case GET_CLOTHINGS:
+      return {
+        ...state,
+        clothings: action.payload,
+        loading: false,
+        errors: null,
+        success: null,
+      };
+    case GET_ELECTRONICS:
+      return {
+        ...state,
+        electronics: action.payload,
+        loading: false,
+        errors: null,
+        success: null,
+      };
+    case SEARCH_PRODUCTS:
+      return {
+        ...state,
+        searchedItems: action.payload
+      };
+    /* case SEARCH_PRODUCTS:
+      return {
+        ...state,
+        searchedItems: state.products.filter((product) => {
+          const regex = new RegExp(`${action.payload}`, "gi");
+          return (
+            product.title.match(regex) ||
+            product.description.match(regex) ||
+            product.category.match(regex)
+          );
+        }),
+      }; */
+    case GET_PRODUCT:
+      return {
+        ...state,
+        product: action.payload,
+        loading: false,
+      };
+    case GET_CATEGORY:
+      return {
+        ...state,
+        category: action.payload,
+        loading: false,
+      };
+    case GET_RELATED_PRODUCTS:
+      return {
+        ...state,
+        relatedProducts: action.payload,
+        loading: false,
+      };
+
+    case CLEAR_MESSAGES:
+      return {
+        ...state,
+        success: "",
+        errors: "",
+      };
+
+    case ERRORS:
+      return {
+        ...state,
+        errors: action.payload,
+        success: null,
+      };
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: null,
+      };
+
+    default:
+      return {
+        ...state,
+      };
+  }
+};
+
+export default ProductsReducer;

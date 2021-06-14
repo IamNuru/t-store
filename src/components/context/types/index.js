@@ -1,6 +1,8 @@
-export const GET_PRODUCTS = "GET_PRODUCTS"
-export const GET_PRODUCT = "GET_PRODUCT"
-export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
+//General Variables
+export const ERRORS = "ERRORS"
+export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
+export const SUCCESS = "SUCCESS"
+export const CLEAR_ERRORS = "CLEAR_ERRORS"
 
 //User variable
 export const REGISTER = "REGISTER"
@@ -9,6 +11,8 @@ export const LOGOUT = "LOGOUT"
 export const SET_LOGIN = "SET_LOGIN"
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD"
 export const ADD_TO_ORDERS = "ADD_TO_ORDERS"
+export const GET_ORDERS = "GET_ORDERS"
+export const GET_USER = "GET_USER"
 
 //Carts
 export const ADD_TO_CART = "ADD_TO_CART"
@@ -23,12 +27,30 @@ export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST"
 export const REMOVE_FROM_WISHLIST = "REMOVE_FROM_WISHLIST"
 
 //categories
-export const GET_WOMENS_CLOTHING = "GET_WOMENS_CLOTHING"
-export const GET_MENS_CLOTHING = "GET_MENS_CLOTHING"
-export const GET_JEWELLERIES = "GET_JEWELLERIES"
+export const GET_CLOTHINGS = "GET_CLOTHINGS"
+export const GET_SHOES = "GET_SHOES"
 export const GET_ELECTRONICS = "GET_ELECTRONICS"
 export const GET_RELATED_PRODUCTS = "GET_RELATED_PRODUCTS"
 
 // website settings
 export const NAVBAR_TOGGLE = "NAVBAR_TOGGLE"
 export const CLOSE_NAVBAR = "CLOSE_NAVBAR"
+
+
+//Product Variables
+export const ADD_PRODUCT = "ADD_PRODUCT"
+export const DELETE_PRODUCT = "DELETE_PRODUCT"
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT"
+export const GET_PRODUCTS = "GET_PRODUCTS"
+export const GET_PRODUCT = "GET_PRODUCT"
+export const SEARCH_PRODUCTS = "SEARCH_PRODUCTS"
+export const GET_CATEGORY_PRODUCTS = "GET_CATEGORY_PRODUCTS"
+
+//Category Variables
+export const ADD_CATEGORY = "ADD_CATEGORY"
+export const DELETE_CATEGORY = "DELETE_CATEGORY"
+export const UPDATE_CATEGORY = "UPDATE_CATEGORY"
+export const GET_CATEGORIES = "GET_CATEGORIES"
+export const GET_CATEGORY = "GET_CATEGORY"
+
+

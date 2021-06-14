@@ -3,34 +3,62 @@ import { withRouter } from "react-router";
 import ProductsContext from "./context/products/ProductsContext";
 import ReactPaginate from "react-paginate";
 import Item from "./Item";
+import emptyImage from "../images/emptyImage.svg";
+
+
 const SearchedItem = (props) => {
   const productsContext = useContext(ProductsContext);
-  const { searchProducts, getProducts, searchedItems } = productsContext;
+  const {
+    setSearchchedItemToNull,
+    searchProducts,
+    searchedItems,
+  } = productsContext;
+
+  
   const [offset, setOffset] = useState(0);
   const [perPage] = useState(3);
+
   useEffect(() => {
-    async function fetchData() {
-      await getProducts();
-      await searchProducts(props.match.params.txt);
-    }
-    fetchData();
+    const fetchproducts = async () => {
+      if (props.match.params.txt !== undefined) {
+        await searchProducts(props.match.params.txt);
+      }
+    };
+    fetchproducts();
+
+    return () => {
+      setSearchchedItemToNull();
+    };
     // eslint-disable-next-line
-  }, [offset]);
+  }, [props.match.params.txt]);
+
   const slice =
     searchedItems !== null && searchedItems.slice(offset, offset + perPage);
+
   const handlePageClick = (e) => {
     const selectedPage = e.selected;
     setOffset(selectedPage * perPage);
   };
   return (
-    <div className="block">
-      <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
-        {searchedItems
-          ? slice.map((product, index) => (
+    <div className="block mb-24 mt-4">
+      {searchedItems !== null ? (
+        searchedItems.length > 0 ? (
+          <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
+            {slice.map((product, index) => (
               <Item product={product} key={index} />
-            ))
-          : "No data"}
-      </div>
+            ))}
+          </div>
+        ) : (
+          <div className="w-full md:2/3 text-center block md:px-16 px-4 grid md:grid-cols-2">
+            <p className="mb-4 md:hidden"> Sorry Your search returns nothing</p>
+            <img src={emptyImage} alt="No data" className="m-auto h-64" />
+            <p className="text-left mt-16 hidden md:block"> Sorry Your search returns nothing</p>
+          </div>
+        )
+      ) : (
+        "Loading"
+      )}
+
       {searchedItems !== null && searchedItems.length > 0 && (
         <ReactPaginate
           previousLabel={"Prev"}

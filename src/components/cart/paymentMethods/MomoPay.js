@@ -5,9 +5,16 @@ import AmountToPay from "../AmountToPay";
 
 const MomoPay = (props) => {
   const { addToOrders } = useContext(AuthContext);
-  const { cart } = useContext(CartContext);
+  const { cart, couponValue, shippingCharge } = useContext(CartContext);
 
   const [momoNumber, setMomoNumber] = useState("");
+  const [amount] = useState(
+    cart
+      .map((item) => item.price * item.qty)
+      .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) -
+      couponValue -
+      shippingCharge
+  );
   const [formError, setFormError] = useState("");
 
   const onChange = (e) => {
@@ -21,10 +28,19 @@ const MomoPay = (props) => {
     } else if (momoNumber.length !== 10) {
       setFormError("Phone number must be 10 values");
     } else {
-      cart.map(ca =>{
-       return addToOrders(ca)
-      })
-      props.directToPage.push("/cart/checkout/success");
+      const order = {
+        momoNumber: momoNumber,
+        amount: amount,
+        payment_method: "momoPay",
+        cart: cart,
+      };
+      addToOrders(order).then(res =>{
+        props.directToPage.push("/cart/checkout/success");
+      });
+      /* cart.map(ca =>{
+       return addToOrders(ca.id)
+      }) */
+      
     }
   };
   return (

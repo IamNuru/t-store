@@ -24,28 +24,25 @@ const Item = (props) => {
         <div className="relative pb-48 overflow-hidden">
           <img
             className="absolute inset-0 h-full w-full object-cover"
-            src={product.image}
-            alt=""
+            src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
+            alt={product.title}
           />
         </div>
         <div className="p-4">
           <h2 className="mt-2 mb-2  font-bold">{product.title}</h2>
           <div className="mt-3 flex items-center">
-            <span className="text-sm font-semibold line-through text-pink-600">
-              Ghs
-              {parseInt(product.price.toLocaleString()) + parseInt(product.id)}
+            {product.deduction && (
+              <span className="text-sm font-semibold line-through text-pink-600">
+                {formatter.format(product.price)}
+              </span>
+            )}
+            &nbsp;
+            <span className="font-bold text-md text-purple-600">
+              {product.deduction
+                ? formatter.format(product.price - product.deduction)
+                : formatter.format(product.price)}
             </span>
             &nbsp;
-            <span className="font-bold text-md">
-              Ghs{product.price.toLocaleString()}
-            </span>
-            &nbsp;
-            <span className="text-sm text-pink-600">
-              {formatter.format(100 - (parseInt(product.price.toLocaleString()) /(
-                parseInt(product.id) +
-                parseInt(product.price.toLocaleString()))*100))}
-              % off
-            </span>
           </div>
         </div>
         <div className="p-4 border-t border-b text-gray-700">

@@ -22,7 +22,8 @@ const Header = () => {
       <div className="navs flex">
         <div
           onClick={toggleBar}
-          className="z-40 cursor-pointer ml-2 md:hidden inline-flex items-center justify-center p-2 text-white bg-purple-600"
+          className={`z-40 cursor-pointer ml-2 md:hidden inline-flex items-center 
+          justify-center p-2 text-white bg-purple-600`}
         >
           <span className="sr-only">Open main menu</span>
 

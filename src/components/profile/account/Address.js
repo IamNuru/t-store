@@ -1,11 +1,10 @@
-import React from 'react'
+import React from "react";
 
 const Address = () => {
-    return (
-        <div className="w-full ml-4">
-            <div className="font-semibold text-center">@Username</div>
+  return (
+    <div className="w-full">
+      <div className="font-semibold text-center">@Username</div>
       <div className=" grid grid-cols-1 md:grid-cols-2 w-full md:w-2/3 lg:w-1/2 m-auto bg-gray-100 mt-1 h-full pb-32 pl-4">
-        
         <div className="flex py-2">
           <label className="w-32 text-gray-600 text-right pr-4">Country</label>
           <div className="ml-1">Nigeria</div>
@@ -24,7 +23,7 @@ const Address = () => {
         </div>
       </div>
     </div>
-    )
-}
+  );
+};
 
-export default Address
+export default Address;

@@ -22,10 +22,10 @@ const Item = (props) => {
     <div className="w-full">
       <div className="c-card p-1 h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div className="relative pb-48 overflow-hidden">
-          <Link to={`/product/${product.category}/${product.id}`}>
+          <Link to={`/product/${product.id}`}>
             <img
               className="absolute inset-0 h-full w-full object-cover"
-              src={product.image}
+              src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
               alt={product.title}
             />
           </Link>
@@ -50,14 +50,14 @@ const Item = (props) => {
           cart.filter((item) => item.id === product.id).length > 0 ? (
             <div
               onClick={removeProductFromCart}
-              className="cursor-pointer bg-pink-200 text-pink-700 font-bold text-xl rounded w-full mx-2 px-4 text-center py-2"
+              className="cursor-pointer bg-pink-200 text-pink-700 font-semibold text-md rounded w-full mx-2 px-4 text-center py-1"
             >
               Remove from Cart
             </div>
           ) : (
             <div
               onClick={addProductToCart}
-              className="cursor-pointer bg-purple-200 text-purple-700 font-bold text-xl rounded w-full mx-2 px-4 text-center py-2"
+              className="cursor-pointer bg-purple-200 text-purple-700 font-semibold text-md rounded w-full mx-2 px-4 text-center py-1"
             >
               Add to Cart
             </div>

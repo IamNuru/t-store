@@ -1,18 +1,14 @@
-import React, { useContext, useRef, useEffect } from "react";
+import React, { useContext, useRef } from "react";
 import ProductsContext from "./context/products/ProductsContext";
 import { withRouter } from 'react-router'
 
 const Search = (props) => {
   const productsContext = useContext(ProductsContext);
-  const { getProducts, searchProducts } = productsContext;
+  const { searchProducts } = productsContext;
 
   const text = useRef("");
 
-  // Load the products
-  useEffect(() => {
-    getProducts();
-  });
-
+  
   // search for products that match the text ref
   const searchItem = (e) => {
     e.preventDefault();
@@ -22,7 +18,7 @@ const Search = (props) => {
       return false;
     }
     searchProducts(txt);
-    props.history.push(`/search/${txt}`)
+    props.history.push(`/search?text=${txt}`)
   };
 
 

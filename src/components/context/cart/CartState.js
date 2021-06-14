@@ -29,7 +29,6 @@ const CartState = (props) => {
   const [state, dispatch] = useReducer(CartReducer, initialState);
 
   if (localStorage.getItem("cart")) {
-    localStorage.clear()
     initialState.cart = initialState.cart.concat(
       JSON.parse(localStorage.getItem("cart"))
     );
