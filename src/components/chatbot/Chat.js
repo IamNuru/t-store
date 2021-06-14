@@ -3,6 +3,7 @@ import Chatbot from "react-simple-chatbot";
 import CheckOrderStatus from "./CheckOrderStatus";
 import { ThemeProvider } from "styled-components";
 import "../../styles/chat/style.css";
+import { Link } from "react-router-dom";
 
 const Chat = () => {
   const theme = {
