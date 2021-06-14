@@ -18,11 +18,11 @@ const Chat = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <Link to="/" className="text-purple-600 mb-4">
+      <Link to="/" className="text-purple-600 mt-4 mb-2">
         <i className="fa fa-arrow-left px-2"></i>
         <span>Back Home</span>
       </Link>
-      <div className="mt-24 text-center w-full md:w-2/3 m-auto px-4 md:px-8">
+      <div className="text-center w-full md:w-2/3 m-auto px-4 md:px-8">
         <Chatbot
           headerTitle="Chat with us"
           className="text-gray-800"
