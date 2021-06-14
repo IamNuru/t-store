@@ -3,7 +3,6 @@ import Chatbot from "react-simple-chatbot";
 import CheckOrderStatus from "./CheckOrderStatus";
 import { ThemeProvider } from "styled-components";
 import "../../styles/chat/style.css";
-import Header from "../Header";
 
 const Chat = () => {
   const theme = {
@@ -19,9 +18,10 @@ const Chat = () => {
   };
   return (
     <ThemeProvider theme={theme}>
-      <>
-        <Header />
-      </>
+      <Link to="/" className="text-purple-600 mb-4">
+        <i className="fa fa-arrow-left px-2"></i>
+        <span>Back Home</span>
+      </Link>
       <div className="mt-24 text-center w-full md:w-2/3 m-auto px-4 md:px-8">
         <Chatbot
           headerTitle="Chat with us"

@@ -12,7 +12,6 @@ const Home = (props) => {
   return (
     <div className="h-full">
       <Switch>
-
         <ProtectedRoute exact path="/dashboard/*" component={Admin}/>
         <ProtectedRoute exact path="/account" component={Profile} />
         <ProtectedRoute exact path="/account/*" component={ProfileMain}/>
