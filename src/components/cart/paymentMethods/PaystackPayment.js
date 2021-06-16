@@ -2,8 +2,10 @@ import React, { useState, useContext } from "react";
 import AuthContext from "../../context/auth/Context";
 import CartContext from "../../context/cart/CartContext";
 import { usePaystackPayment } from "react-paystack";
+import { useHistory } from "react-router-dom"
 
 const Pay = (props) => {
+  const history = useHistory()
   const { addToOrders, user } = useContext(AuthContext);
   const { cart, couponValue, shippingCharge } = useContext(CartContext);
 
@@ -47,8 +49,7 @@ const Pay = (props) => {
       transaction_id: reference.reference,
     };
     addToOrders(order);
-    props.directToPage.push(`/cart/checkout/success/${reference.reference}`);
-    console.log(reference);
+    history.push(`/cart/checkout/success/${reference.reference}`);
   };
 
   // you can call this function anything
