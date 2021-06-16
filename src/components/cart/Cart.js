@@ -27,10 +27,10 @@ const Cart = () => {
         (couponValue / 100)
 
   //Cost after deducting coupon value if any
-  const totalCostAfterCoupon = (totalCost && couponWorth) && totalCost - couponWorth
+  const totalCostAfterCoupon = totalCost  && totalCost - couponWorth
   
   //Total amount to pay
-  const totalAmountToPay = (totalCostAfterCoupon && shippingCharge) && totalCostAfterCoupon+shippingCharge
+  const totalAmountToPay = totalCostAfterCoupon && totalCostAfterCoupon+shippingCharge
   
   
   return (
