@@ -32,7 +32,7 @@ const CartRow = (props) => {
       <td className="hidden pt-4 pb-4 md:table-cell">
         <div>
           <img
-            src={`http://localhost:8000/storage/images/products/${item.image}`}
+            src={`${process.env.REACT_APP_URL}/storage/images/products/${item.image}`}
             className="w-20 rounded"
             alt="Thumbnail"
           />
