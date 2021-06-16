@@ -36,7 +36,7 @@ const Main = (props) => {
           <ProtectedRoute exact path="/cart/checkout" component={Checkout} />
           <ProtectedRoute
             exact
-            path="/cart/checkout/success"
+            path="/cart/checkout/success/:reference"
             component={SuccessOrder}
           />
           <Route exact path="/search" component={SearchedItem} />

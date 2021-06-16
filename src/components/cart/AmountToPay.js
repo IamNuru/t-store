@@ -6,7 +6,6 @@ import Formatter from "../Formatter";
 const AmountToPay = () => {
   const { cart, couponValue, shippingCharge } = useContext(CartContext);
 
-  
   return cart?.length > 0 ? (
     <p className="italic text-sm">
       {" "}
@@ -16,7 +15,10 @@ const AmountToPay = () => {
           cart
             .map((item) => item.price * item.qty)
             .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) -
-            couponValue -
+            cart
+              .map((item) => item.price * item.qty)
+              .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) *
+              (couponValue / 100) +
             shippingCharge
         )}
       </span>

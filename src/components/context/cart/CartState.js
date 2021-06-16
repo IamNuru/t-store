@@ -22,7 +22,7 @@ const CartState = (props) => {
       loyal: 55,
       promo: 45,
     },
-    couponValue: 5,
+    couponValue: '',
     shippingCharge: 15,
   };
 

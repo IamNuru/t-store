@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import AuthContext from "../context/auth/Context";
 import CartContext from "../context/cart/CartContext";
 
-const SuccessOrder = () => {
+const SuccessOrder = (props) => {
   const { user } = useContext(AuthContext);
   const { clearCart } = useContext(CartContext);
 
   useEffect(() => {
     clearCart();
-
+    console.log(props)
     // eslint-disable-next-line
   }, []);
   return (
@@ -21,10 +21,10 @@ const SuccessOrder = () => {
         <i className="fa fa-handshake-o"></i>
       </h2>
       <p className="mt-2 mb-4">
-        Hi {user.fullName}, Thank you for making an order with us
+        Hi {user && user.name}, Thank you for making an order with us
       </p>
       <p className="my-4">
-        Your Order Number is <span className="text-pink-600">1144586665</span>
+        Your Order Number is <span className="text-pink-600">{props && props.match.params.reference}</span>
       </p>
       <p className="my-4">
         Please Copy your order number for references should you need inquiry

@@ -10,6 +10,29 @@ const Cart = () => {
   const cartContext = useContext(CartContext);
   const { cart, shippingCharge, couponValue } = cartContext;
 
+  //Get the total cost in carty
+  const totalCost =
+    cart?.length > 0 &&
+      cart
+        .map((item) => item.price * item.qty)
+        .reduce((prev, next) => parseInt(prev) + parseInt(next), 0)
+    
+
+  //Get percentage amount to be deducted
+  const couponWorth =
+    cart?.length > 0 &&
+      cart
+        .map((item) => item.price * item.qty)
+        .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) *
+        (couponValue / 100)
+
+  //Cost after deducting coupon value if any
+  const totalCostAfterCoupon = (totalCost && couponWorth) && totalCost - couponWorth
+  
+  //Total amount to pay
+  const totalAmountToPay = (totalCostAfterCoupon && shippingCharge) && totalCostAfterCoupon+shippingCharge
+  
+  
   return (
     <div className="flex justify-center my-6">
       {cart.length < 1 ? (
@@ -54,22 +77,17 @@ const Cart = () => {
                       Subtotal
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                      {Formatter.format(
-                        cart
-                          .map((item) => item.price * item.qty)
-                          .reduce(
-                            (prev, next) => parseInt(prev) + parseInt(next),
-                            0
-                          )
+                      {totalCost && Formatter.format(
+                        totalCost
                       )}
                     </div>
                   </div>
                   <div className="flex justify-between pt-4 border-b">
                     <div className="flex lg:px-4 lg:py-2 m-2 text-lg lg:text-xl font-bold text-gray-800">
-                      Coupon 'New customer'
+                      Coupon
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-green-700">
-                      -{Formatter.format(couponValue)}
+                      {couponValue ? `${couponValue}%` : "-"}
                     </div>
                   </div>
                   <div className="flex justify-between pt-4 border-b">
@@ -78,13 +96,8 @@ const Cart = () => {
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
                       {/* substract coupon value here */}
-                      {Formatter.format(
-                        cart
-                          .map((item) => item.price * item.qty)
-                          .reduce(
-                            (prev, next) => parseInt(prev) + parseInt(next),
-                            0
-                          ) - couponValue
+                      {totalCost && Formatter.format(
+                        totalCost - couponWorth
                       )}
                     </div>
                   </div>
@@ -93,7 +106,7 @@ const Cart = () => {
                       Shipping Charge
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                      {Formatter.format(shippingCharge)}
+                      {shippingCharge ? Formatter.format(shippingCharge) : "-"}
                     </div>
                   </div>
                   <div className="flex justify-between pt-4 border-b">
@@ -101,15 +114,8 @@ const Cart = () => {
                       Total
                     </div>
                     <div className="lg:px-4 lg:py-2 m-2 lg:text-lg font-bold text-center text-gray-900">
-                      {Formatter.format(
-                        cart
-                          .map((item) => item.price * item.qty)
-                          .reduce(
-                            (prev, next) => parseInt(prev) + parseInt(next),
-                            0
-                          ) -
-                          couponValue -
-                          shippingCharge
+                      {totalAmountToPay && Formatter.format(
+                        totalAmountToPay
                       )}
                     </div>
                   </div>
