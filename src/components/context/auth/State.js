@@ -35,6 +35,7 @@ const AuthState = (props) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Access-Control-Allow-Origin": "*"
     },
   };
 
@@ -143,7 +144,8 @@ const AuthState = (props) => {
   //add to order
   const addToOrders = async (order) => {
     await axios
-      .post(`${process.env.REACT_APP_API_URL}/order`, order, config)
+      .post(`http://localhost:8000/api/order`, order, config)
+      /* .post(`${process.env.REACT_APP_API_URL}/order`, order, config) */
       .then((res) => {
         dispatch({
           type: ADD_TO_ORDERS,

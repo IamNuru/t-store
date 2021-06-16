@@ -50,6 +50,7 @@ const ProductsState = (props) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Access-Control-Allow-Origin":"*"
     },
   };
 
