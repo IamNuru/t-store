@@ -5,7 +5,7 @@ const CartRow = (props) => {
   const { item } = props;
 
   const cartContext = useContext(CartContext);
-  const { removeFromCart, increaseCartItemQty, decreaseCartItemQty } =
+  const { errors, removeFromCart, increaseCartItemQty, decreaseCartItemQty } =
     cartContext;
 
   const [qty, setQty] = useState(1);
@@ -28,7 +28,8 @@ const CartRow = (props) => {
   return props.item === null ? (
     "Loading"
   ) : (
-    <tr className="border-8 border-l-4 border-r-4 border-white">
+    <tr className={`${errors?.length > 0 && errors === `${item.title} is currently out of stock` && 'disabled'}
+    border-8 border-l-4 border-r-4 border-white`}>
       <td className="hidden pt-4 pb-4 md:table-cell">
         <div>
           <img
@@ -86,7 +87,7 @@ const CartRow = (props) => {
       </td>
       <td className="text-right">
         <span className="text-sm lg:text-base font-medium">
-          {(item.price * qty).toLocaleString()}
+          {item.deduction ? ((item.price-item.deduction) * qty).toLocaleString():(item.price * qty).toLocaleString()}
         </span>
       </td>
     </tr>

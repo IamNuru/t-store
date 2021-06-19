@@ -2,13 +2,14 @@ import {
   REGISTER,
   LOGIN,
   LOGOUT,
-  UPDATE_PASSWORD,
   ADD_TO_ORDERS,
   ERRORS,
   CLEAR_ERRORS,
   GET_ORDERS,
   GET_USER,
   CLEAR_MESSAGES,
+  SUCCESS_MESSAGES,
+  SET_lOADING,
 } from "../types";
 
 const AuthReducer = (state, action) => {
@@ -19,8 +20,9 @@ const AuthReducer = (state, action) => {
       return {
         ...state,
         user: action.payload.user,
-        logedin: action.payload.token,
-        errors: null
+        logedin: true,
+        errors: null,
+        loading: false,
       };
 
     case GET_USER:
@@ -28,6 +30,7 @@ const AuthReducer = (state, action) => {
         ...state,
         user: action.payload,
         logedin: true,
+        loading: false,
       };
 
     /* case LOGIN:
@@ -44,34 +47,29 @@ const AuthReducer = (state, action) => {
         ...state,
         logedin: false,
         user: null,
-        errors: null
+        errors: null,
+        loading: false,
       };
 
     case GET_ORDERS:
       return {
         ...state,
-        orders: action.payload
+        orders: action.payload,
+        loading: false,
       };
 
     case CLEAR_ERRORS:
       return {
-        errors: null
-      };
-
-    case UPDATE_PASSWORD:
-      return {
-        ...state,
-        success:action.payload,
-        /* user: {...state.user, password:action.payload.newPassword},
-        users: [...state.users.map((u) => 
-        u.username === state.user.username ? {...u, password:action.payload.newPassword} : u)] */
+        errors: null,
+        loading: false,
       };
       
 
     case ERRORS:
       return {
         ...state,
-        errors: action.payload
+        errors: action.payload,
+        loading: false,
       };
 
     case ADD_TO_ORDERS:
@@ -80,11 +78,25 @@ const AuthReducer = (state, action) => {
         orders: [...state.orders, action.payload]
       };
 
+    case SUCCESS_MESSAGES:
+      return {
+        ...state,
+        success: action.payload,
+        loading:false,
+      };
+
     case CLEAR_MESSAGES:
       return {
         ...state,
-        success:'',
-        errors:''
+        success:null,
+        errors:null,
+        loading: false,
+      };
+
+    case SET_lOADING:
+      return {
+        ...state,
+        loading:action.payload,
       };
 
     default:

@@ -10,7 +10,7 @@ const Sidebar = (props) => {
   const { pathname } = useLocation();
 
   const onMobileNavClick = () => {
-    window.addEventListener("click", function (e) {
+    window.addEventListener("click", function(e) {
       if (document.getElementById("mobile-navs").contains(e.target)) {
         closeNavbar(false);
       } else if (document.getElementById("mobile-nav").contains(e.target)) {
@@ -26,27 +26,24 @@ const Sidebar = (props) => {
         <nav className="hidden md:block">
           <ul className="border-b pb-6 block whitespace-nowrap overflow-auto justify-center text-left">
             <li
-              className={`${
-                pathname === "/" && "text-red-600 ml-2"
-              } text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
+              className={`${pathname === "/" &&
+                "text-red-600 ml-2"} text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
             >
               <Link to="/" className="px-2 inline-block w-full">
                 Home
               </Link>
             </li>
             <li
-              className={`${
-                pathname === "/category/shoes" && "text-red-600 ml-2"
-              } text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
+              className={`${pathname === "/category/shoes" &&
+                "text-red-600 ml-2"} text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
             >
               <Link to="/category/shoes" className="px-2 inline-block w-full">
                 Shoes
               </Link>
             </li>
             <li
-              className={`${
-                pathname === "/category/clothings" && "text-red-600 ml-2"
-              } text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
+              className={`${pathname === "/category/clothings" &&
+                "text-red-600 ml-2"} text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
             >
               <Link
                 to="/category/clothings"
@@ -56,9 +53,8 @@ const Sidebar = (props) => {
               </Link>
             </li>
             <li
-              className={`${
-                pathname === "/category/electronics" && "text-red-600 ml-2"
-              } text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
+              className={`${pathname === "/category/electronics" &&
+                "text-red-600 ml-2"} text-gray-600 hover:text-black mb-1 transition duration-400 px-4 py-2 md:px-0 md:py-0`}
             >
               <Link
                 to="/category/electronics"
@@ -140,6 +136,13 @@ const Sidebar = (props) => {
                 </Link>
               </li>
             </ul>
+            <ul>
+              <li className="mt-8">
+                <Link to="/help" className="">
+                  <i className="fa fa-question-circle px-1">Help</i>
+                </Link>
+              </li>
+            </ul>
           </nav>
           <nav className="mt-8 block">
             <ul className="flex whitespace-nowrap overflow-auto px-8">
@@ -164,9 +167,6 @@ const Sidebar = (props) => {
                 </li>
               )}
             </ul>
-            <Link to="/help" className="">
-              <i className="fa fa-help px-1">Help</i>
-            </Link>
           </nav>
         </div>
       </div>

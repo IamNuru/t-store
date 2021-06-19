@@ -12,7 +12,7 @@ const Pay = (props) => {
   //get cart amount to payy
   const [amount] = useState(
     cart
-      .map((item) => item.price * item.qty)
+      .map((item) => (item.price-item.deduction) * item.qty)
       .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) -
       couponValue -
       shippingCharge
@@ -26,10 +26,10 @@ const Pay = (props) => {
     email: user ? user.email : "abdulainurudeentitiaka@gmail.com",
     amount:
       (cart
-        .map((item) => item.price * item.qty)
+        .map((item) => (item.price-item.deduction) * item.qty)
         .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) -
         cart
-          .map((item) => item.price * item.qty)
+          .map((item) => (item.price-item.deduction) * item.qty)
           .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) *
           (couponValue / 100) +
         shippingCharge) *

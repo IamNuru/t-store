@@ -6,17 +6,25 @@ import {
   CLEAR_CART,
   SET_COUPON_VALUE,
   ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST
+  REMOVE_FROM_WISHLIST,
+  GET_CART_ITEMS,
+  ERRORS,
+  CLEAR_ERRORS,
 } from "../types";
 
 const CartReducer = (state, action) => {
-  switch (action.type) {  
+  switch (action.type) {
     case ADD_TO_CART:
       return {
         ...state,
         cart: [...state.cart, action.payload],
       };
 
+    case GET_CART_ITEMS:
+      return {
+        ...state,
+        peep: action.payload,
+      };
 
     case REMOVE_FROM_CART:
       return {
@@ -30,13 +38,11 @@ const CartReducer = (state, action) => {
         wishList: [...state.wishList, action.payload],
       };
 
-
     case REMOVE_FROM_WISHLIST:
       return {
         ...state,
         wishList: state.wishList.filter((item) => item.id !== action.payload),
       };
-
 
     case INCREASE_CART_ITEM_QTY:
       return {
@@ -46,7 +52,6 @@ const CartReducer = (state, action) => {
         ),
       };
 
-
     case DECREASE_CART_ITEM_QTY:
       return {
         ...state,
@@ -55,19 +60,30 @@ const CartReducer = (state, action) => {
         ),
       };
 
-
     case CLEAR_CART:
       return {
         ...state,
         cart: [],
+        errors: null,
       };
 
     case SET_COUPON_VALUE:
-      return{
+      return {
         ...state,
-        couponValue: state.coupons[action.payload]
-      }
+        couponValue: state.coupons[action.payload],
+      };
 
+    case ERRORS:
+      return {
+        ...state,
+        errors: action.payload,
+      };
+
+    case CLEAR_ERRORS:
+      return {
+        ...state,
+        errors: null,
+      };
 
     default:
       return {

@@ -1,6 +1,7 @@
 import { useReducer } from "react";
 import CartReducer from "./CartReducer";
 import CartContext from "./CartContext";
+import axios from "axios";
 
 import {
   ADD_TO_CART,
@@ -10,61 +11,76 @@ import {
   CLEAR_CART,
   SET_COUPON_VALUE,
   ADD_TO_WISHLIST,
-  REMOVE_FROM_WISHLIST
+  REMOVE_FROM_WISHLIST,
+  ERRORS,
+  CLEAR_ERRORS,
 } from "../types";
 
 const CartState = (props) => {
   const initialState = {
     cart: [],
-    wishList:[],
+    peep: [],
+    wishList: [],
     coupons: {
       NewComer: 5,
       loyal: 55,
       promo: 45,
     },
-    couponValue: '',
+    couponValue: "",
     shippingCharge: 15,
+    errors: null,
   };
 
   const [state, dispatch] = useReducer(CartReducer, initialState);
+
+  //configuration
+  const config = {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      "Access-Control-Allow-Origin": "*",
+    },
+  };
 
   if (localStorage.getItem("cart")) {
     initialState.cart = initialState.cart.concat(
       JSON.parse(localStorage.getItem("cart"))
     );
   }
-  if (localStorage.getItem("wishList")) {
-    localStorage.clear()
-    initialState.cart = initialState.cart.concat(
-      JSON.parse(localStorage.getItem("wishList"))
+  if (localStorage.getItem("wish")) {
+    initialState.wishList = initialState.wishList.concat(
+      JSON.parse(localStorage.getItem("wish"))
     );
   }
   //actions
-  const setLocalstorage = () =>{
+  const setLocalstorage = () => {
     if (localStorage.getItem("cart")) {
       initialState.cart = initialState.cart.concat(
         JSON.parse(localStorage.getItem("cart"))
       );
     }
-  }
+  };
   //Add to cart
-  const addToCart = (product) => {
+  const addToCart = ({ id, price, title, description, image, deduction }) => {
     dispatch({
       type: ADD_TO_CART,
-      payload: Object.assign(product, { qty: 1 }),
+      payload: Object.assign(
+        { id, price, title, description, image, deduction },
+        { qty: 1 }
+      ),
     });
-
     //Add to local storage
     var scart = [];
     if (localStorage.getItem("cart")) {
       scart = JSON.parse(localStorage.getItem("cart"));
     }
     scart.push({
-      id: product.id,
-      image: product.image,
-      price: product.price,
-      qty: product.qty,
-      title: product.title,
+      id: id,
+      image: image,
+      price: price,
+      deduction: deduction,
+      qty: 1,
+      title: title,
     });
     localStorage.setItem("cart", JSON.stringify(scart));
   };
@@ -93,8 +109,9 @@ const CartState = (props) => {
 
     //Add to local storage
     var swishList = [];
-    if (localStorage.getItem("wishList")) {
-      swishList = JSON.parse(localStorage.getItem("wishList"));
+    if (localStorage.getItem("wish")) {
+      swishList = JSON.parse(localStorage.getItem("wish"));
+      console.log('no');
     }
     swishList.push({
       id: product.id,
@@ -103,7 +120,7 @@ const CartState = (props) => {
       qty: product.qty,
       title: product.title,
     });
-    localStorage.setItem("wishList", JSON.stringify(swishList));
+    window.localStorage.setItem("wish", JSON.stringify(swishList));
   };
 
   //Remove item from wish list
@@ -114,10 +131,10 @@ const CartState = (props) => {
     });
 
     //remove wish list item from local storage
-    if (localStorage.getItem("wishList")) {
-      let swishList = JSON.parse(localStorage.getItem("wishList"));
+    if (localStorage.getItem("wish")) {
+      let swishList = JSON.parse(localStorage.getItem("wish"));
       let filteredSwishList = swishList.filter((item) => item.id !== id);
-      localStorage.setItem("wishList", JSON.stringify(filteredSwishList));
+      localStorage.setItem("wish", JSON.stringify(filteredSwishList));
     }
   };
 
@@ -155,6 +172,47 @@ const CartState = (props) => {
     }
   };
 
+  //push items to cart
+  const refreshCart = async (cart) => {
+    if(cart?.length > 0){
+    const idsInCart =
+      cart?.length > 0 &&
+      cart.map((i) => {
+        return i.id;
+      });
+    try {
+      const res = await axios.get(
+        `${process.env.REACT_APP_API_URL}/cart/items/${cart}?ids=${idsInCart}`,
+        //`http://localhost:8000/api/cart/items?ids=${idsInCart}`,
+        config
+      );
+      cart =
+        res.data?.length > 0 &&
+        cart.forEach((oldCartItem) => {
+          let updatedCart = res.data.find(
+            (newCartItem) => newCartItem.id === oldCartItem.id
+          );
+          
+          if (updatedCart) {
+            oldCartItem.price = updatedCart.price;
+            oldCartItem.deduction = updatedCart.deduction;
+            if (updatedCart.qty < 1) {
+              dispatch({
+                type: ERRORS,
+                payload: `${updatedCart.title} is currently out of stock`,
+              });
+            } else if (updatedCart.qty < oldCartItem.qty) {
+              dispatch({
+                type: ERRORS,
+                payload: `${updatedCart.title} Quantity requested is more than quantity available`,
+              });
+            }
+          }
+        });
+    } catch (error) {}
+  }
+  };
+
   //change
 
   //clear cart
@@ -169,12 +227,19 @@ const CartState = (props) => {
     }
   };
 
-  const setCouponValue = (coupon) =>{
+  //clearErrors
+  const clearErrors = () => {
+    dispatch({
+      type: CLEAR_ERRORS,
+    });
+  };
+
+  const setCouponValue = (coupon) => {
     dispatch({
       type: SET_COUPON_VALUE,
-      payload: coupon
-    })
-  }
+      payload: coupon,
+    });
+  };
 
   return (
     <CartContext.Provider
@@ -184,6 +249,7 @@ const CartState = (props) => {
         coupons: state.coupons,
         couponValue: state.couponValue,
         shippingCharge: state.shippingCharge,
+        errors: state.errors,
         addToCart,
         removeFromCart,
         addToWishList,
@@ -192,7 +258,9 @@ const CartState = (props) => {
         decreaseCartItemQty,
         clearCart,
         setLocalstorage,
-        setCouponValue
+        setCouponValue,
+        refreshCart,
+        clearErrors,
       }}
     >
       {props.children}

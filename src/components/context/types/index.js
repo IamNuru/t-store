@@ -1,8 +1,10 @@
 //General Variables
 export const ERRORS = "ERRORS"
 export const CLEAR_MESSAGES = "CLEAR_MESSAGES"
+export const SUCCESS_MESSAGES = "SUCCESS_MESSAGES"
 export const SUCCESS = "SUCCESS"
 export const CLEAR_ERRORS = "CLEAR_ERRORS"
+export const SET_lOADING = "SET_lOADING"
 
 //User variable
 export const REGISTER = "REGISTER"
@@ -21,6 +23,7 @@ export const INCREASE_CART_ITEM_QTY = "INCREASE_CART_ITEM_QTY"
 export const DECREASE_CART_ITEM_QTY = "DEREASE_CART_ITEM_QTY"
 export const CLEAR_CART = "CLEAR_CART"
 export const SET_COUPON_VALUE = "SET_COUPON_VALUE"
+export const GET_CART_ITEMS = "GET_CART_ITEMS"
 
 //Wish List
 export const ADD_TO_WISHLIST = "ADD_TO_WISHLIST"

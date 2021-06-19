@@ -35,7 +35,7 @@ const Item = (props) => {
     removeFromWishList(product.id);
   };
   return (
-    <div className="rounded overflow-hidden shadow-lg">
+    <div className="rounded shadow-lg">
       <div className="img">
         <Link to={`/product/${product.id}`}>
           <img

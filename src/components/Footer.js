@@ -19,7 +19,7 @@ const Footer = (props) => {
           Explore
         </a>{" "}
         some of my works. Please consider hiring me if you deem it fit :). Email
-        via me{" "}
+        me via{" "}
         <span className="text-purple-800">
           abdulainurudeentitiaka@gmail.com
         </span>

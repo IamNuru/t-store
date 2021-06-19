@@ -4,8 +4,9 @@ import ProductsContext from "../../context/products/ProductsContext";
 import { Link } from "react-router-dom";
 
 const Category = (props) => {
-  const { deleteCategory, getCategories, getCategory } =
-    useContext(ProductsContext);
+  const { deleteCategory, getCategories, getCategory } = useContext(
+    ProductsContext
+  );
 
   const { category } = props;
   const history = useHistory();
@@ -25,12 +26,14 @@ const Category = (props) => {
     "Loading"
   ) : (
     <tr className="border-2 border-l-4 border-r-4 border-white bg-gray-400">
-      <Link
-        to={`/category/${category.slug}`}
-        className="text-white text-md hover:text-blue-800"
-      >
-        <td className="pl-2 pt-2 pb-2 md:table-cell">{category.name}</td>
-      </Link>
+      <td className="pl-2 pt-2 pb-2 md:table-cell">
+        <Link
+          to={`/category/${category.slug}`}
+          className="w-full text-white text-md hover:text-blue-800"
+        >
+          {category.name}
+        </Link>
+      </td>
       <td className="pt-2 pb-2 text-center">{category.products.length}</td>
       <td className="flex pt-2 pb-2 text-right">
         <i

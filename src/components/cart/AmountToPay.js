@@ -13,10 +13,10 @@ const AmountToPay = () => {
       <span className="font-semibold">
         {Formatter.format(
           cart
-            .map((item) => item.price * item.qty)
+            .map((item) => (item.price-item.deduction) * item.qty)
             .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) -
             cart
-              .map((item) => item.price * item.qty)
+              .map((item) => (item.price-item.deduction) * item.qty)
               .reduce((prev, next) => parseInt(prev) + parseInt(next), 0) *
               (couponValue / 100) +
             shippingCharge

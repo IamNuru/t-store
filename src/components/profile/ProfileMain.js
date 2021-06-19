@@ -6,15 +6,19 @@ import ResetPassword from "./account/ResetPassword";
 import Orders from "./tstore/Orders";
 import WishList from "./tstore/WishList";
 import Sidebar from "../Sidebar";
+import Header from "../Header"
 
 const ProfileMain = () => {
   const history = useHistory();
   return (
     <div className="block">
       <div className="md:hidden mt-28">
+      <>
+        <Header />
+      </>
         <Sidebar />
       </div>
-      <div className="block block w-48 mt-14">
+      <div className="block block w-48 mt-14 md:mt-0">
         <h2 className="text-center font-bold text-2xl py-2">Account</h2>
       </div>
       <div className="w-full shadow-md mb-2">

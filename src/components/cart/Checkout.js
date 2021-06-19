@@ -9,9 +9,9 @@ const Checkout = (props) => {
       <h2 className="font-semibold mt-4 text-xl text-gray-700 text-center">
         Confirm Order and Pay
       </h2>
-      <p className="text-center">
+      <div className="text-center">
         <AmountToPay />
-      </p>
+      </div>
       <div className="block w-full text-center py-6">
         <Pay />
       </div>

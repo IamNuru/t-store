@@ -3,6 +3,7 @@ import ProductsContext from "../context/products/ProductsContext";
 import CartContext from "../context/cart/CartContext";
 import Item from "./Item";
 import formatter from "../Formatter";
+import LoadingGif from "../LoadingGif";
 
 const SingleProduct = (props) => {
   const {
@@ -42,7 +43,7 @@ const SingleProduct = (props) => {
                 <img
                   src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
                   alt={product.title}
-                  className="w-full h-full p-2"
+                  className="w-full h-full p-2 object-contain"
                 />
               </div>
               {product.qty < 1 ? (
@@ -51,7 +52,7 @@ const SingleProduct = (props) => {
                 </div>
               ) : (
                 <div className="block md:flex justify-between">
-                  <span className="">
+                  <span className="mr-4">
                     Price:{" "}
                     {product.deduction ? (
                       <>
@@ -93,12 +94,12 @@ const SingleProduct = (props) => {
             "Product Not Found"
           )
         ) : (
-          "Loading"
+          <LoadingGif />
         )}
         {wishList.length > 0 && (
           <div className="block">
             <h2 className="font-semibold py-2 pl-1 text-xl">Wish List</h2>
-            <div className="block md:flex">
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-4 w-full">
               {wishList.map((wish, index) => {
                 return <Item product={wish} key={index} />;
               })}

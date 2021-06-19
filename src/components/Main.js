@@ -17,6 +17,8 @@ import Sidebar from "./Sidebar";
 import Shoes from "./products/shoes/Shoes";
 import PageNotFound from "./PageNotFound";
 import Header from "./Header";
+import ForgotPassword from "./auth/ForgotPassword";
+import ResetPassword from "./auth/ResetPassword";
 
 const Main = (props) => {
   return (
@@ -44,6 +46,8 @@ const Main = (props) => {
           <Route exact path="/product/:id" component={SingleProduct} />
           <Route exact path="/login" component={LoginPage} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/forgotPassword" component={ForgotPassword} />
+          <Route exact path="/password/reset/:token" component={ResetPassword} />
           <Route exact path="/" component={MainPage} />
           <Route path="*" component={PageNotFound} />
         </Switch>

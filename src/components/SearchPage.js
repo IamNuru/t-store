@@ -4,9 +4,14 @@ import ProductsContext from "./context/products/ProductsContext";
 import ReactPaginate from "react-paginate";
 import Item from "./Item";
 import emptyImage from "../images/emptyImage.svg";
+import LoadingGif from "./LoadingGif";
 
 
 const SearchedItem = (props) => {
+  //get text or searched  passed from url
+  const query = new URLSearchParams(props.location.search);
+
+
   const productsContext = useContext(ProductsContext);
   const {
     setSearchchedItemToNull,
@@ -20,8 +25,8 @@ const SearchedItem = (props) => {
 
   useEffect(() => {
     const fetchproducts = async () => {
-      if (props.match.params.txt !== undefined) {
-        await searchProducts(props.match.params.txt);
+      if (query.get('text')) {
+        await searchProducts(query.get('text'));
       }
     };
     fetchproducts();
@@ -56,7 +61,9 @@ const SearchedItem = (props) => {
           </div>
         )
       ) : (
-        "Loading"
+        <div className="w-full flex align-center justify-center">
+          {<LoadingGif />}
+        </div>
       )}
 
       {searchedItems !== null && searchedItems.length > 0 && (

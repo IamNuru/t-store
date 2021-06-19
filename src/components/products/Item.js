@@ -50,7 +50,7 @@ const Item = (props) => {
           </div>
         </Link>
       </div>
-      <div className="px-6 pt-2 pb-2">
+      <div className="p-4">
         {wishList.length > 0 &&
         wishList.some((wli) => wli.id === product.id) ? (
           <span

@@ -9,13 +9,13 @@ import {
   REGISTER,
   LOGIN,
   LOGOUT,
-  UPDATE_PASSWORD,
   ADD_TO_ORDERS,
   ERRORS,
   GET_ORDERS,
   GET_USER,
-CLEAR_MESSAGES,
-
+  CLEAR_MESSAGES,
+  SUCCESS_MESSAGES,
+  SET_lOADING,
 } from "../types";
 
 const AuthState = (props) => {
@@ -26,6 +26,7 @@ const AuthState = (props) => {
     errors: null,
     success: null,
     logedin: false,
+    loading: false,
   };
 
   const [state, dispatch] = useReducer(AuthReducer, initialState);
@@ -35,7 +36,7 @@ const AuthState = (props) => {
     headers: {
       "Content-Type": "application/json",
       Authorization: `Bearer ${localStorage.getItem("token")}`,
-      "Access-Control-Allow-Origin": "*"
+      "Access-Control-Allow-Origin": "*",
     },
   };
 
@@ -123,22 +124,67 @@ const AuthState = (props) => {
     });
   };
 
+  //Reset user that forgot his/her password
+  const resetPassword = async (credentials) => {
+    await axios
+      .post(`http://localhost:8000/api/password/reset`, credentials, config)
+      .then((res) => {
+        dispatch({
+          type: SUCCESS_MESSAGES,
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        var obj = err.response.data.errors ? err.response.data.errors : "";
+        dispatch({
+          type: ERRORS,
+          payload: obj[Object.keys(obj)[0]],
+        });
+      });
+  };
+
   //update logged in user password
   const updatePassword = async (credentials) => {
-    await axios.post(`${process.env.REACT_APP_API_URL}/resetpassword`, credentials, config)
-    .then(res => {
-      dispatch({
-        type: UPDATE_PASSWORD,
-        payload: res.data,
+    await axios
+      .post(
+        `${process.env.REACT_APP_API_URL}/resetpassword`,
+        credentials,
+        config
+      )
+      .then((res) => {
+        dispatch({
+          type: SUCCESS_MESSAGES,
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        var obj = err.response.data.errors ? err.response.data.errors : "";
+        dispatch({
+          type: ERRORS,
+          payload: obj[Object.keys(obj)[0]],
+        });
       });
-    }).catch((err) => {
-      var obj = err.response.data.errors ? err.response.data.errors : "";
-      dispatch({
-        type: ERRORS,
-        payload: obj[Object.keys(obj)[0]],
+  };
+
+  //forgot password
+  const sendPasswordResetLink = async (credentials) => {
+    await axios
+      .post(`http://localhost:8000/api/password/email`, credentials, config)
+      .then((res) => {
+        console.log(res.data);
+        dispatch({
+          type: SUCCESS_MESSAGES,
+          payload: res.data.message,
+        });
+      })
+      .catch((err) => {
+        console.log(err.response);
+        var obj = err.response.data.errors ? err.response.data.errors : "";
+        dispatch({
+          type: ERRORS,
+          payload: obj[Object.keys(obj)[0]],
+        });
       });
-    });
-    
   };
 
   //add to order
@@ -174,11 +220,19 @@ const AuthState = (props) => {
   };
 
   //Clear messages if any
-  const clearMessages = () =>{
+  const clearMessages = () => {
     dispatch({
-      type:CLEAR_MESSAGES,
-    })
-  }
+      type: CLEAR_MESSAGES,
+    });
+  };
+
+  //Clear messages if any
+  const setLoading = (loadValue) => {
+    dispatch({
+      type: SET_lOADING,
+      payload: loadValue
+    });
+  };
 
   return (
     <AuthContext.Provider
@@ -189,14 +243,18 @@ const AuthState = (props) => {
         orders: state.orders,
         errors: state.errors,
         success: state.success,
+        loading: state.loading,
         login,
         register,
         logout,
         updatePassword,
+        resetPassword,
         addToOrders,
         setError,
         getOrders,
         clearMessages,
+        sendPasswordResetLink,
+        setLoading
       }}
     >
       {props.children}

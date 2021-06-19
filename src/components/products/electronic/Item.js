@@ -2,10 +2,10 @@ import React, { useContext } from "react";
 import { Link } from "react-router-dom";
 import CartContext from "../../context/cart/CartContext";
 const Item = (props) => {
-  const cartContext = useContext(CartContext);
-  const { cart, addToCart, removeFromCart } = cartContext;
+  const { cart, addToCart, removeFromCart } = useContext(CartContext);
 
   const { product } = props;
+
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
     currency: "GHS",
@@ -20,7 +20,7 @@ const Item = (props) => {
   };
   return (
     <div className="w-full">
-      <div className="c-card p-1 h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
+      <div className="p-1 h-full block bg-white shadow-md hover:shadow-xl rounded-lg overflow-hidden">
         <div className="relative pb-48 overflow-hidden">
           <Link to={`/product/${product.id}`}>
             <img

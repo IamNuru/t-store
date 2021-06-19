@@ -14,7 +14,7 @@ function App() {
       <ProductsState>
         <CartState>
           <SettingsState>
-            <div className="App block">
+            <div className="App block bg-gray-100">
               <Router>
                 <div className="block min-h-screen">
                   <Home />

@@ -6,7 +6,7 @@ import SettingsContext from "./context/settings/SettingsContext";
 import { Link } from "react-router-dom";
 
 const Header = () => {
-  const { logout, logedin } = useContext(AuthContext);
+  const { logedin } = useContext(AuthContext);
   const { isNavbarOpen, closeNavbar } = useContext(SettingsContext);
   const { cart } = useContext(CartContext);
 
@@ -67,30 +67,26 @@ const Header = () => {
 
       <div className="flex ml-auto mr-4">
         {!logedin ? (
-          <div>
+          <div className="flex">
             <Link
               to="/register"
-              className="px-2 py-1 font-3xl"
+              className="px-2 py-1 "
               title="register"
             >
-              <i className="fa fa-user-plus"></i>
+              <i className="md:hidden fa fa-user-plus"></i>
+              <i className="hidden md:block">Register</i>
             </Link>
-            <Link to="/login" className="px-2 py-1 font-3xl" title="sign in">
-              <i className="fa fa-sign-in"></i>
+            <Link to="/login" className="px-2 py-1 flex" title="sign in">
+              <i className="md:hidden fa fa-sign-in"></i>
+              <i className="hidden md:block">Login</i>
             </Link>
           </div>
         ) : (
-          <div>
-            <Link to="/account" className="px-2 py-1 font-3xl" title="profiile">
-              <i className="fa fa-user-circle"></i>
+          <div className="flex">
+            <Link to="/account" className="px-2 py-1 " title="profiile">
+              <i className="md:hidden fa fa-user-circle"></i>
+              <i className="hidden md:block">Account</i>
             </Link>
-            <button
-              onClick={() => logout()}
-              className="px-1 py-2 font-3xl"
-              title="Logout"
-            >
-              <i className="fa fa-sign-out"></i>
-            </button>
           </div>
         )}
         <Link to="/cart"  className="px-2 ml-2">

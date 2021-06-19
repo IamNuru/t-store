@@ -32,7 +32,7 @@ const WishListItem = (props) => {
         onClick={() => setOpenItem(!openItem)}
       >
         <img
-          src={item.image}
+          src={`${process.env.REACT_APP_URL}/storage/images/products/${item.image}`}
           alt={item.price}
           className="flex-shrink-0 w-8 h-8 rounded-full mr-2"
         />

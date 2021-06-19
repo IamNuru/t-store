@@ -11,7 +11,7 @@ const Order = (props) => {
         "Loading"
       ) : (
         <div
-          className={`w-full block transition duration-500 py-1 px-1 shadow-md mb-2`}
+          className={`w-full block transition duration-500 py-1 px-1 shadow-md mb-4`}
         >
           <div
             className={`${
@@ -19,7 +19,7 @@ const Order = (props) => {
             } flex justify-between cursor-pointer`}
             onClick={() => setOpenOrder(!openOrder)}
           >
-            <div className="flex-grow text-center text-green-600">
+            <div className="flex-grow text-left text-green-600">
               <span className="text-gray-600">order number:</span>{" "}
               {item.transaction_id}
             </div>
@@ -48,7 +48,7 @@ const Order = (props) => {
                             <div className="p-2 block">
                               <div className="flex justify-left">
                                 <img              
-                                src={`http://localhost:8000/storage/images/products/${p.image}`}
+                                src={`${process.env.REACT_APP_URL}/storage/images/products/${p.image}`}
                                   alt={p.price}
                                   className="flex-shrink-0 w-14 h-14 mr-2"
                                 />
