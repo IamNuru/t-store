@@ -78,7 +78,7 @@ const AuthState = (props) => {
       .then((res) => {
         dispatch({
           type: REGISTER,
-          payload: res.data[0],
+          payload: res.data,
         });
       })
       .catch((err) => {
@@ -127,7 +127,7 @@ const AuthState = (props) => {
   //Reset user that forgot his/her password
   const resetPassword = async (credentials) => {
     await axios
-      .post(`http://localhost:8000/api/password/reset`, credentials, config)
+      .post(`${process.env.REACT_APP_API_URL}/password/reset`, credentials, config)
       .then((res) => {
         dispatch({
           type: SUCCESS_MESSAGES,
@@ -169,7 +169,7 @@ const AuthState = (props) => {
   //forgot password
   const sendPasswordResetLink = async (credentials) => {
     await axios
-      .post(`http://localhost:8000/api/password/email`, credentials, config)
+      .post(`${process.env.REACT_APP_API_URL}/password/email`, credentials, config)
       .then((res) => {
         console.log(res.data);
         dispatch({
