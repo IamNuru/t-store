@@ -4,25 +4,24 @@ import { Route, Redirect } from "react-router-dom"
 import AuthContext from "./components/context/auth/Context"
 
 const ProtectedRoute = ({ component: Component, ...rest}) => {
-    const { logedin, user } = useContext(AuthContext);
-    const [isAuthenticated, setIsAuthenticated] = useState(true)
+    const { logedin, user, setLogedIn } = useContext(AuthContext);
     
     useEffect(() => {
-        setIsAuthenticated(true);
-        const getAuthUser = async () => {
+        const getAuthUser = () => {
           const configs = {
             headers: {
               "Content-Type": "application/json",
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
           };
-          await axios
+          axios
             .get(`${process.env.REACT_APP_API_URL}/user`, configs)
             .then((res) => {
-                setIsAuthenticated(true)
+                setLogedIn(true)
+
             })
             .catch((err) => {
-                setIsAuthenticated(false)
+                setLogedIn(false)
             });
         };
         getAuthUser();
@@ -32,7 +31,7 @@ const ProtectedRoute = ({ component: Component, ...rest}) => {
     return (
         <Route { ...rest } render={
             props =>{
-                if(user && logedin && isAuthenticated){
+                if(logedin){
                     return <Component {...rest} {...props} />
                 }else{
                     return <Redirect to={

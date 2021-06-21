@@ -25,7 +25,8 @@ const CategoryProducts = (props) => {
       {errors === null || errors === "" ? (
         <div>
           <h2
-            className={`${window.location.href === "http://localhost:3000/" && "hidden"} text-center shadow-md mb-2 py-4 font-semibold text-xl font-serif w-full capitalize`}
+            className={`${window.location.href === "http://localhost:3000/" &&
+              "hidden"} text-center shadow-md mb-2 py-4 font-semibold text-xl font-serif w-full capitalize`}
           >
             {props.match.params.cat}
           </h2>
@@ -37,7 +38,9 @@ const CategoryProducts = (props) => {
                 })}
               </div>
             ) : (
-              "No data"
+              <div className="mt-20 w-full flex align-center justify-center">
+                No data
+              </div>
             )
           ) : (
             <LoadingGif />

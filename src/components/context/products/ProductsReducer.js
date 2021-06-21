@@ -19,6 +19,7 @@ import {
   CLEAR_MESSAGES,
   CLEAR_ERRORS,
   SET_lOADING,
+  SET_FORM_lOADING,
 } from "../types";
 
 const ProductsReducer = (state, action) => {
@@ -30,6 +31,7 @@ const ProductsReducer = (state, action) => {
         ...state,
         success: action.payload,
         errors: null,
+        formloading:false,
       };
     case ADD_CATEGORY:
     case UPDATE_CATEGORY:
@@ -38,6 +40,7 @@ const ProductsReducer = (state, action) => {
         ...state,
         success: action.payload,
         errors: null,
+        formloading:false,
       };
 
     case GET_CATEGORIES:
@@ -136,6 +139,12 @@ const ProductsReducer = (state, action) => {
       return {
         ...state,
         loading: action.payload,
+      };
+
+    case SET_FORM_lOADING:
+      return {
+        ...state,
+        formloading: action.payload,
       };
 
     default:

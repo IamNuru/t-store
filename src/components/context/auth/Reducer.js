@@ -10,6 +10,7 @@ import {
   CLEAR_MESSAGES,
   SUCCESS_MESSAGES,
   SET_lOADING,
+  SET_LOGED_IN,
 } from "../types";
 
 const AuthReducer = (state, action) => {
@@ -92,6 +93,14 @@ const AuthReducer = (state, action) => {
         errors:null,
         loading: false,
       };
+
+    case SET_LOGED_IN:
+      return {
+        ...state,
+        logedin:action.payload,
+      };
+
+
 
     case SET_lOADING:
       return {

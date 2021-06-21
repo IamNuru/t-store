@@ -1,5 +1,4 @@
 import React, { useContext, useState, useEffect } from "react";
-import { useHistory } from "react-router-dom";
 import ProductsContext from "../../context/products/ProductsContext";
 
 const AddProduct = () => {
@@ -13,9 +12,10 @@ const AddProduct = () => {
     getCategories,
     setProductToNull,
     clearMessages,
+    formloading,
+    setFormLoading
   } = useContext(ProductsContext);
 
-  const history  = useHistory()
   //set data state
   const [data, setData] = useState({
     title: "",
@@ -25,7 +25,7 @@ const AddProduct = () => {
     qty: "",
   });
 
-  const [category, setCategory] = useState('')
+  const [category, setCategory] = useState("");
   const [image_name, setImageName] = useState("");
   const [update, setUpdate] = useState(false);
 
@@ -48,6 +48,7 @@ const AddProduct = () => {
   useEffect(() => {
     getCategories();
     clearMessages();
+    setFormLoading(false)
 
     // eslint-disable-next-line
   }, []);
@@ -58,9 +59,9 @@ const AddProduct = () => {
   };
 
   //When category is selected
-  const onCategorySelect = (e) =>{
-    setCategory(e.target.value)
-  }
+  const onCategorySelect = (e) => {
+    setCategory(e.target.value);
+  };
 
   //on File change
   const onFileChange = (e) => {
@@ -77,19 +78,15 @@ const AddProduct = () => {
         qty: product.qty,
         image_name: product.image_name,
       });
-      setCategory(product.category_id)
+      setCategory(product.category_id);
       setUpdate(true);
     }
 
     // eslint-disable-next-line
   }, [product]);
 
-
-  //clear inputs when you get success message
-  useEffect(() => {
-    setTimeout(() => {
-      clearMessages()
-    }, 5000);
+  //clear form on success
+  if (success) {
     setTimeout(() => {
       setData({
         title: "",
@@ -99,30 +96,28 @@ const AddProduct = () => {
         qty: "",
       });
     }, 500);
-    // eslint-disable-next-line
-  }, [success])
+  }
 
+  //clear inputs when you get success message
+  useEffect(() => {
+    setTimeout(() => {
+      clearMessages();
+    }, 5000);
+    // eslint-disable-next-line
+  }, [success]);
 
   // on submit
   const onSubmit = (e) => {
     e.preventDefault();
-    var formData = new FormData();
-    if (category === '') {
-      alert('please select a category')
+    clearMessages();
+    if (category === "") {
+      alert("please select a category");
       return false;
-    }
-    clearMessages()
-    if (update) {
-      formData.append("title", title);
-      formData.append("price", price);
-      formData.append("qty", qty);
-      formData.append("deductions", deductions);
-      formData.append("image_name", image_name);
-      formData.append("category", category);
-      formData.append("description", description);
-      updateProduct(product.id, formData);
-      history.push("/dashboard/products");
     } else {
+      setFormLoading(true)
+      //declare form data
+      var formData = new FormData();
+      //append fields to form data
       formData.append("title", title);
       formData.append("price", price);
       formData.append("qty", qty);
@@ -130,8 +125,12 @@ const AddProduct = () => {
       formData.append("image_name", image_name);
       formData.append("category", category);
       formData.append("description", description);
-      addProduct(formData);
-      
+      //if in update mode
+      if (update) {
+        updateProduct(product.id, formData);
+      } else {
+        addProduct(formData);
+      }
     }
   };
 
@@ -152,9 +151,8 @@ const AddProduct = () => {
             onChange={onChange}
             value={title}
             required
-            className={`${
-              errors?.title && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.title &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
           {errors?.title && (
             <label className="text-sm italic text-red-600 py-1">
@@ -170,9 +168,8 @@ const AddProduct = () => {
             onChange={onChange}
             value={price}
             required
-            className={`${
-              errors?.price && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.price &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
           {errors?.price && (
             <label className="text-sm italic text-red-600 py-1">
@@ -187,9 +184,8 @@ const AddProduct = () => {
             name="deductions"
             onChange={onChange}
             value={deductions}
-            className={`${
-              errors?.deductions && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.deductions &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
           {errors?.deductions && (
             <label className="text-sm italic text-red-600 py-1">
@@ -205,9 +201,8 @@ const AddProduct = () => {
             onChange={onChange}
             value={description}
             required
-            className={`${
-              errors?.description && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.description &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           ></textarea>
           {errors?.description && (
             <label className="text-sm italic text-red-600 py-1">
@@ -223,9 +218,8 @@ const AddProduct = () => {
             onChange={onChange}
             value={qty}
             required
-            className={`${
-              errors?.qty && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.qty &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
           {errors?.qty && (
             <label className="text-sm italic text-red-600 py-1">
@@ -240,9 +234,7 @@ const AddProduct = () => {
             className="border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300"
             onChange={onCategorySelect}
           >
-          <option value="">
-            Select category
-          </option>
+            <option value="">Select category</option>
             {categories?.length > 0 ? (
               categories.map((cat, index) => {
                 return (
@@ -263,9 +255,8 @@ const AddProduct = () => {
             name="image_name"
             onChange={onFileChange}
             required
-            className={`${
-              errors?.title && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.title &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
           {errors?.image_name && (
             <label className="text-sm italic text-red-600 py-1">
@@ -279,11 +270,13 @@ const AddProduct = () => {
           {success.message}
         </div>
       )}
-      <div className="btn flex float-right">
+      <div className="btn flex text-right">
         <button
+          disabled={formloading}
           type="submit"
-          className="mx-2 mb-8 py-1 mt-2 px-4 border-1 bg-purple-600
-           text-white font-semibold text-xl text-center outline-none capitalize"
+          className={`${formloading ?
+            'bg-gray-300 cursor-not-allowed':'bg-purple-600'} mx-2 mb-8 py-1 mt-2 px-4 border-1 
+           text-white font-semibold text-xl text-center outline-none capitalize`}
         >
           {update ? "Update" : "Save"}
         </button>

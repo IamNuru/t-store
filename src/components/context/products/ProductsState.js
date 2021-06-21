@@ -24,6 +24,7 @@ import {
   CLEAR_MESSAGES,
   CLEAR_ERRORS,
   SET_lOADING,
+  SET_FORM_lOADING,
 } from "../types";
 
 const ProductsState = (props) => {
@@ -39,6 +40,7 @@ const ProductsState = (props) => {
     relatedProducts: null,
     searchedItems: null,
     loading: true,
+    formloading: false,
     errors: null,
     success: null,
   };
@@ -116,7 +118,7 @@ const ProductsState = (props) => {
           var obj = err.response.data.errors ? err.response.data.errors : "";
           dispatch({
             type: ERRORS,
-            payload: obj[Object.keys(obj)[0]],
+            payload: obj,
           });
         });
     } catch (error) {}
@@ -375,10 +377,19 @@ const ProductsState = (props) => {
     });
   };
 
-  //Clear messages if any
-  const setLoading = () => {
+  //Set state loading
+  const setLoading = (loadingValue) => {
     dispatch({
       type: SET_lOADING,
+      payload:loadingValue
+    });
+  };
+
+  //Set state of form when clicked
+  const setFormLoading = (loadingValue) => {
+    dispatch({
+      type: SET_FORM_lOADING,
+      payload:loadingValue
     });
   };
 
@@ -397,6 +408,7 @@ const ProductsState = (props) => {
         category: state.category,
         searchedItems: state.searchedItems,
         loading: state.loading,
+        formloading: state.formloading,
         error: state.error,
         success: state.success,
         categories: state.categories,
@@ -422,7 +434,7 @@ const ProductsState = (props) => {
         setSearchchedItemToNull,
         clearMessages,
         clearErrors,
-        setLoading,
+        setFormLoading,
       }}
     >
       {props.children}

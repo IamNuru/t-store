@@ -10,6 +10,8 @@ const AddCategory = () => {
     category,
     updateCategory,
     clearMessages,
+    formloading,
+    setFormLoading
   } = useContext(ProductsContext);
 
   // declare state
@@ -21,6 +23,7 @@ const AddCategory = () => {
 
   useEffect(() => {
     clearMessages();
+    setFormLoading(false)
     if (category) {
       setData({
         categoryName: category.name,
@@ -40,18 +43,20 @@ const AddCategory = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
-  //clear inputs when you get success message
-  useEffect(() => {
-    setTimeout(() => {
-      clearMessages();
-    }, 5000);
-
+  //clear form on success
+  if(success){
     setTimeout(() => {
       setData({
         categoryName: "",
         description: "",
       });
     }, 500);
+  }
+  //clear inputs when you get success message
+  useEffect(() => {
+    setTimeout(() => {
+      clearMessages();
+    }, 5000);
 
     // eslint-disable-next-line
   }, [success]);
@@ -59,6 +64,7 @@ const AddCategory = () => {
   //on submit of form
   const onSubmit = (e) => {
     e.preventDefault();
+    setFormLoading(true)
     clearMessages();
     if (update) {
       updateCategory(category.id, data);
@@ -67,7 +73,7 @@ const AddCategory = () => {
     }
   };
   return (
-    <form onSubmit={onSubmit} className="px-4">
+    <form onSubmit={onSubmit} className="px-4" title={`${formloading && 'processing'}`}>
       <div className="w-full block grid grid-col-1 md:grid-cols-2 gap-4">
         <div className="w-full block">
           <label className="py-1 text-md text-gray-800">Name</label>
@@ -110,9 +116,10 @@ const AddCategory = () => {
       )}
       <div className="btn flex float-right">
         <button
+        disabled={formloading}
           type="submit"
-          className="mb-8 mx-2 py-1 mt-2 px-4 border-1 bg-purple-600
-           text-white font-semibold text-md text-center outline-none capitalize"
+          className={`${formloading ? 'bg-gray-300':'bg-purple-600'} mb-8 mx-2 py-1 mt-2 px-4 border-1
+           text-white font-semibold text-md text-center outline-none capitalize`}
         >
           {update ? "Update" : "Save"}
         </button>

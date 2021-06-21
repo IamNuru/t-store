@@ -16,6 +16,7 @@ import {
   CLEAR_MESSAGES,
   SUCCESS_MESSAGES,
   SET_lOADING,
+  SET_LOGED_IN,
 } from "../types";
 
 const AuthState = (props) => {
@@ -108,6 +109,14 @@ const AuthState = (props) => {
         });
       });
   };
+
+  //set the logedin status
+  const setLogedIn = (logedinValue) =>{
+    dispatch({
+      type: SET_LOGED_IN,
+      payload: logedinValue
+    });
+  }
 
   //Clear all errors on the page such as form errors
   const setError = (err) => {
@@ -254,7 +263,8 @@ const AuthState = (props) => {
         getOrders,
         clearMessages,
         sendPasswordResetLink,
-        setLoading
+        setLoading,
+        setLogedIn
       }}
     >
       {props.children}

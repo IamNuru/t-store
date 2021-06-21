@@ -5,6 +5,8 @@ export const SUCCESS_MESSAGES = "SUCCESS_MESSAGES"
 export const SUCCESS = "SUCCESS"
 export const CLEAR_ERRORS = "CLEAR_ERRORS"
 export const SET_lOADING = "SET_lOADING"
+export const SET_FORM_lOADING = "SET_FORM_lOADING"
+export const SET_LOGED_IN = "SET_LOGED_IN"
 
 //User variable
 export const REGISTER = "REGISTER"
