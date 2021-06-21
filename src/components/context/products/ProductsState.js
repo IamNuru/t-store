@@ -435,6 +435,7 @@ const ProductsState = (props) => {
         clearMessages,
         clearErrors,
         setFormLoading,
+        setLoading,
       }}
     >
       {props.children}

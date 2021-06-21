@@ -43,7 +43,9 @@ const CategoryProducts = (props) => {
               </div>
             )
           ) : (
-            <LoadingGif />
+            <div className="mt-20 w-full flex align-center justify-center">
+              <LoadingGif />
+            </div>
           )}
         </div>
       ) : (
