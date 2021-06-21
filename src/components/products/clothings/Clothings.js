@@ -5,6 +5,8 @@ import Item from "./Item";
 import LoadingGif from "../../LoadingGif";
 
 const Clothings = () => {
+  //set state variables
+  const [loading, setLoading] = useState(true);
   const [clothings, setClothings] = useState(null);
 
   useEffect(() => {
@@ -13,8 +15,11 @@ const Clothings = () => {
         .get(`${process.env.REACT_APP_API_URL}/products/homepage/clothings`)
         .then((res) => {
           setClothings(res.data);
+          setLoading(false)
         })
-        .catch((err) => {});
+        .catch((err) => {
+          setLoading(false)
+        });
     };
     getHomePageCategoryProducts();
     // eslint-disable-next-line
@@ -28,15 +33,17 @@ const Clothings = () => {
       >
         {window.location.pathname.replace("%20", " ").split("/")}
       </h2>
-      {clothings !== null ? (
-        clothings.length > 0 ? (
+      {!loading ? (
+        clothings?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
             {clothings.map((product, index) => {
               return <Item product={product} key={index} />;
             })}
           </div>
         ) : (
-          "No data"
+          <div className="mt-20 w-full flex align-center justify-center">
+          No data
+        </div>
         )
       ) : (
         <div className="w-full flex align-center justify-center">

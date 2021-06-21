@@ -18,6 +18,7 @@ import {
   ERRORS,
   CLEAR_MESSAGES,
   CLEAR_ERRORS,
+  SET_lOADING,
 } from "../types";
 
 const ProductsReducer = (state, action) => {
@@ -124,10 +125,17 @@ const ProductsReducer = (state, action) => {
         errors: action.payload,
         success: null,
       };
+
     case CLEAR_ERRORS:
       return {
         ...state,
         errors: null,
+      };
+
+    case SET_lOADING:
+      return {
+        ...state,
+        loading: action.payload,
       };
 
     default:

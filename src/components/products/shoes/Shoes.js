@@ -7,6 +7,7 @@ import LoadingGif from "../../LoadingGif";
 const Shoes = (props) => {
   /* const {getShoes, shoes } = productsContext; */
 
+  const [loading, setLoading] = useState(true)
   const [shoes, setShoes] = useState(null);
 
   useEffect(() => {
@@ -15,8 +16,11 @@ const Shoes = (props) => {
         .get(`${process.env.REACT_APP_API_URL}/products/homepage/shoes?limit=6`)
         .then((res) => {
           setShoes(res.data);
+          setLoading(false)
         })
-        .catch((err) => {});
+        .catch((err) => {
+          setLoading(false)
+        });
     };
     getHomePageCategoryProducts();
     // eslint-disable-next-line
@@ -30,15 +34,17 @@ const Shoes = (props) => {
       >
         {window.location.pathname.split("/")}
       </h2>
-      {shoes !== null ? (
-        shoes.length > 0 ? (
+      {!loading ? (
+        shoes?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
             {shoes.map((product, index) => {
               return <Item product={product} key={index} />;
             })}
           </div>
         ) : (
-          "No data"
+          <div className="mt-20 w-full flex align-center justify-center">
+          No Data
+        </div>
         )
       ) : (
         <div className="w-full flex align-center justify-center">

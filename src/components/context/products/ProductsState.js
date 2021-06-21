@@ -23,6 +23,7 @@ import {
   ERRORS,
   CLEAR_MESSAGES,
   CLEAR_ERRORS,
+  SET_lOADING,
 } from "../types";
 
 const ProductsState = (props) => {
@@ -374,6 +375,13 @@ const ProductsState = (props) => {
     });
   };
 
+  //Clear messages if any
+  const setLoading = () => {
+    dispatch({
+      type: SET_lOADING,
+    });
+  };
+
 
 
   
@@ -414,6 +422,7 @@ const ProductsState = (props) => {
         setSearchchedItemToNull,
         clearMessages,
         clearErrors,
+        setLoading,
       }}
     >
       {props.children}

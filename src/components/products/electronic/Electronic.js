@@ -5,10 +5,12 @@ import Item from "./Item";
 import LoadingGif from "../../LoadingGif";
 
 const Electronic = () => {
+
+  //set state variables
+  const [loading, setLoading] = useState(true);
   const [electronics, setElectronics] = useState(null);
 
   useEffect(() => {
-    
     //fetch home page products
     axios
       .get(
@@ -16,9 +18,11 @@ const Electronic = () => {
       )
       .then((res) => {
         setElectronics(res.data);
+        setLoading(false);
       })
-      .catch((err) => {});
-
+      .catch((err) => {
+        setLoading(false);
+      });
 
     // eslint-disable-next-line
   }, []);
@@ -31,15 +35,17 @@ const Electronic = () => {
       >
         {window.location.pathname.replace("%20", " ").split("/")}
       </h2>
-      {electronics !== null ? (
-        electronics.length > 0 ? (
+      {!loading ? (
+        electronics?.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-1 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-3 gap-5">
             {electronics.map((product, index) => {
               return <Item product={product} key={index} />;
             })}
           </div>
         ) : (
-          "No data"
+          <div className="mt-20 w-full flex align-center justify-center">
+            No Data
+          </div>
         )
       ) : (
         <div className="w-full flex align-center justify-center">

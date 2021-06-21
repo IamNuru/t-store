@@ -68,7 +68,7 @@ const AuthState = (props) => {
     };
     getAuthUser();
     // eslint-disable-next-line
-  }, [initialState.user]);
+  }, [initialState.user, initialState.logedin]);
 
   /** *** ACTIONS *** */
   //Register new user
