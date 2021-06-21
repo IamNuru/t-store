@@ -13,15 +13,16 @@ const SingleProduct = (props) => {
     product,
     getRelatedProducts,
     relatedProducts,
+    setLoading
   } = useContext(ProductsContext);
   const { cart, addToCart, removeFromCart, wishList } = useContext(CartContext);
 
   useEffect(() => {
-      const getSingleProduct = async () => {
-        await getProduct(props.match.params.id);
-        await getRelatedProducts(props.match.params.id);
-      };
-
+    setLoading(true)
+    const getSingleProduct = async () => {
+      await getProduct(props.match.params.id);
+      await getRelatedProducts(props.match.params.id);
+    };
     getSingleProduct();
 
     return () => {
@@ -33,7 +34,7 @@ const SingleProduct = (props) => {
   return (
     <div className="block md:flex">
       <div className="w-full p-4 md:min-w-96">
-        {loading !== null ? (
+        {!loading ? (
           product !== null ? (
             <>
               <h2 className="w-full text-center font-semibold text-xl">
@@ -91,10 +92,15 @@ const SingleProduct = (props) => {
               </div>
             </>
           ) : (
-            "Product Not Found"
+            <div className="w-full bg-red-600 m-auto mt-8 text-center mb-8">
+              Product Not Found
+            </div>
           )
         ) : (
-          <LoadingGif />
+          <div className="block w-full bg-red-600 m-auto mt-8 text-center align-center">
+            <LoadingGif />
+          </div>
+          
         )}
         {wishList.length > 0 && (
           <div className="block">

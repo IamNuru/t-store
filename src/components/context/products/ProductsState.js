@@ -307,7 +307,12 @@ const ProductsState = (props) => {
         type: GET_PRODUCT,
         payload: res.data,
       });
-    } catch (error) {}
+    } catch (error) {
+      dispatch({
+        type: SET_lOADING,
+        payload: false,
+      });
+    }
   };
 
 

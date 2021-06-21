@@ -127,6 +127,7 @@ const ProductsReducer = (state, action) => {
         ...state,
         errors: action.payload,
         success: null,
+        loading: false,
       };
 
     case CLEAR_ERRORS:
