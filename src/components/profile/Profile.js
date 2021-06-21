@@ -6,7 +6,7 @@ import Sidebar from "../Sidebar";
 import Header from "../Header";
 
 const Profile = () => {
-  const { orders, getOrders } = useContext(AuthContext);
+  const { orders, getOrders, user } = useContext(AuthContext);
   const { wishList } = useContext(CartContext);
 
   useEffect(() => {
@@ -30,7 +30,7 @@ const Profile = () => {
           >
             <h2 className="md:font-semibold text-md w-full md:py-2">Details</h2>
             <div className="hidden md:block text-gray-800 block">
-              <div>abdulainurudeentitiaka@gmail.com</div>
+              <div>{user && user.email}</div>
               <div>0543027058</div>
             </div>
             <i className="md:hidden fa fa-angle-right ml-auto font-semibold"></i>
@@ -89,7 +89,7 @@ const Profile = () => {
             <h2 className="md:font-semibold text-md w-full md:py-2">Orders</h2>
             <p className="hidden md:block text-gray-800 block">
               You've made{" "}
-              <span className="text-purple-800">{orders.length}</span> orders
+              <span className="text-purple-800">{orders?.length}</span> orders
             </p>
             <i className="md:hidden fa fa-angle-right ml-auto font-semibold"></i>
           </Link>
@@ -102,7 +102,7 @@ const Profile = () => {
             </h2>
             <p className="hidden md:block text-gray-800 block">
               You have{" "}
-              <span className="text-purple-800">{wishList.length}</span> items
+              <span className="text-purple-800">{wishList?.length}</span> items
               in your wish list. <br />
             </p>
             <i className="md:hidden fa fa-angle-right ml-auto font-semibold"></i>
