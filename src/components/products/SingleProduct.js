@@ -97,7 +97,7 @@ const SingleProduct = (props) => {
             </div>
           )
         ) : (
-          <div className="block w-full bg-red-600 m-auto mt-8 text-center align-center">
+          <div className="block w-full m-auto mt-8 mb-8 text-center">
             <LoadingGif />
           </div>
           
