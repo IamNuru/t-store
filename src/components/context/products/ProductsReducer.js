@@ -115,8 +115,8 @@ const ProductsReducer = (state, action) => {
     case CLEAR_MESSAGES:
       return {
         ...state,
-        success: "",
-        errors: "",
+        success: null,
+        errors: null,
       };
 
     case ERRORS:

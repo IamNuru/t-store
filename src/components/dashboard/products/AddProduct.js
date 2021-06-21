@@ -12,7 +12,7 @@ const AddProduct = () => {
     success,
     getCategories,
     setProductToNull,
-    clearErrors,
+    clearMessages,
   } = useContext(ProductsContext);
 
   const history  = useHistory()
@@ -47,7 +47,7 @@ const AddProduct = () => {
   //component
   useEffect(() => {
     getCategories();
-    clearErrors();
+    clearMessages();
 
     // eslint-disable-next-line
   }, []);
@@ -84,6 +84,25 @@ const AddProduct = () => {
     // eslint-disable-next-line
   }, [product]);
 
+
+  //clear inputs when you get success message
+  useEffect(() => {
+    setTimeout(() => {
+      clearMessages()
+    }, 5000);
+    setTimeout(() => {
+      setData({
+        title: "",
+        price: "",
+        deductions: "",
+        description: "",
+        qty: "",
+      });
+    }, 500);
+    // eslint-disable-next-line
+  }, [success])
+
+
   // on submit
   const onSubmit = (e) => {
     e.preventDefault();
@@ -92,7 +111,7 @@ const AddProduct = () => {
       alert('please select a category')
       return false;
     }
-    clearErrors()
+    clearMessages()
     if (update) {
       formData.append("title", title);
       formData.append("price", price);
@@ -112,9 +131,6 @@ const AddProduct = () => {
       formData.append("category", category);
       formData.append("description", description);
       addProduct(formData);
-      if(success !== null){
-        clearErrors()
-      }
       
     }
   };

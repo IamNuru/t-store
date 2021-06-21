@@ -6,8 +6,9 @@ import AuthContext from "./components/context/auth/Context"
 const ProtectedRoute = ({ component: Component, ...rest}) => {
     const { logedin, user } = useContext(AuthContext);
     const [isAuthenticated, setIsAuthenticated] = useState(true)
-
+    
     useEffect(() => {
+        setIsAuthenticated(true);
         const getAuthUser = async () => {
           const configs = {
             headers: {

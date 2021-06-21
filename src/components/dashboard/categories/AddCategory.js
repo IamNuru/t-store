@@ -1,28 +1,36 @@
-import React, { useContext, useState, useEffect} from "react";
+import React, { useContext, useState, useEffect } from "react";
 import ProductsContext from "../../context/products/ProductsContext";
 
 const AddCategory = () => {
   // destructure product context
-  const { addCategory, errors, success, category, updateCategory } = useContext(ProductsContext);
+  const {
+    addCategory,
+    errors,
+    success,
+    category,
+    updateCategory,
+    clearMessages,
+  } = useContext(ProductsContext);
 
   // declare state
   const [data, setData] = useState({
     categoryName: "",
     description: "",
   });
-  const [update, setUpdate] = useState(false)
+  const [update, setUpdate] = useState(false);
 
   useEffect(() => {
-    if(category){
+    clearMessages();
+    if (category) {
       setData({
-        categoryName:category.name,
-        description:category.description,
-      })
-      setUpdate(true)
+        categoryName: category.name,
+        description: category.description,
+      });
+      setUpdate(true);
     }
-    
+
     // eslint-disable-next-line
-  }, [category])
+  }, [category]);
 
   // destructure data state
   const { categoryName, description } = data;
@@ -32,13 +40,30 @@ const AddCategory = () => {
     setData({ ...data, [e.target.name]: e.target.value });
   };
 
+  //clear inputs when you get success message
+  useEffect(() => {
+    setTimeout(() => {
+      clearMessages();
+    }, 5000);
+
+    setTimeout(() => {
+      setData({
+        categoryName: "",
+        description: "",
+      });
+    }, 500);
+
+    // eslint-disable-next-line
+  }, [success]);
+
   //on submit of form
   const onSubmit = (e) => {
     e.preventDefault();
+    clearMessages();
     if (update) {
-      updateCategory(category.id, data)
-    }else{
-    addCategory(data);
+      updateCategory(category.id, data);
+    } else {
+      addCategory(data);
     }
   };
   return (
@@ -52,16 +77,14 @@ const AddCategory = () => {
             onChange={onChange}
             value={categoryName}
             required
-            className={`${
-              errors?.categoryName && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
+            className={`${errors?.categoryName &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           />
-          {
-            errors?.categoryName && <label className="py-1 text-sm italic text-red-600">
-            {errors.categoryName }
-          </label>
-          }
-          
+          {errors?.categoryName && (
+            <label className="py-1 text-sm italic text-red-600">
+              {errors.categoryName}
+            </label>
+          )}
         </div>
         <div className="w-full block">
           <label className="py-1 text-md text-gray-800">Description</label>
@@ -70,16 +93,14 @@ const AddCategory = () => {
             onChange={onChange}
             value={description}
             required
-            className={`${
-              errors?.description && "border-red-600 "
-            } border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
-          
+            className={`${errors?.description &&
+              "border-red-600 "} border border-gray-400 w-full py-1 px-1 outline-none focus:border-purple-300`}
           ></textarea>
-          {
-            errors?.description && <label className="py-1 text-sm italic text-red-600">
-            {errors.description }
-          </label>
-          }
+          {errors?.description && (
+            <label className="py-1 text-sm italic text-red-600">
+              {errors.description}
+            </label>
+          )}
         </div>
       </div>
       {success && (
@@ -93,11 +114,12 @@ const AddCategory = () => {
           className="mb-8 mx-2 py-1 mt-2 px-4 border-1 bg-purple-600
            text-white font-semibold text-md text-center outline-none capitalize"
         >
-          {update ? 'Update' : "Save"}
+          {update ? "Update" : "Save"}
         </button>
         <button
           type="submit"
-          className={`${!update && 'hidden'} mb-8 py-1 mt-2 px-4 border-1 bg-pink-600
+          className={`${!update &&
+            "hidden"} mb-8 py-1 mt-2 px-4 border-1 bg-pink-600
            text-white text-md text-center outline-none capitalize`}
         >
           New
