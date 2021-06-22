@@ -13,11 +13,12 @@ const SingleProduct = (props) => {
     product,
     getRelatedProducts,
     relatedProducts,
-    setLoading
+    setLoading,
   } = useContext(ProductsContext);
   const { cart, addToCart, removeFromCart, wishList } = useContext(CartContext);
 
   useEffect(() => {
+    console.log(product.image)
     setLoading(true)
     const getSingleProduct = async () => {
       await getProduct(props.match.params.id);
@@ -92,12 +93,12 @@ const SingleProduct = (props) => {
               </div>
             </>
           ) : (
-            <div className="w-full bg-red-600 m-auto mt-8 text-center mb-8">
+            <div className="w-full mt-8 py-16 text-center mb-8">
               Product Not Found
             </div>
           )
         ) : (
-          <div className="block w-full m-auto mt-8 mb-8 text-center">
+          <div className="block h-48 md:h-96 w-full m-auto mt-8 mb-8 text-center">
             <LoadingGif />
           </div>
           

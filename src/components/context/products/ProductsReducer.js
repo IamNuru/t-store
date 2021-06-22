@@ -120,6 +120,7 @@ const ProductsReducer = (state, action) => {
         ...state,
         success: null,
         errors: null,
+        formloading:false,
       };
 
     case ERRORS:
@@ -128,12 +129,14 @@ const ProductsReducer = (state, action) => {
         errors: action.payload,
         success: null,
         loading: false,
+        formloading:false,
       };
 
     case CLEAR_ERRORS:
       return {
         ...state,
         errors: null,
+        formloading:false,
       };
 
     case SET_lOADING:

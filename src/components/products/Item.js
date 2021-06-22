@@ -38,7 +38,7 @@ const Item = (props) => {
     <div className="rounded overflow-hidden shadow-lg mb-4">
       <Link to={`/product/${product.id}`}>
         <img
-          className="w-full h-48 max-h-48"
+          className="object-cover h-48 max-h-48"
           src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
           alt={product.title}
         />

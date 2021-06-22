@@ -3,6 +3,7 @@ import axios from "axios";
 
 import Item from "./Item";
 import LoadingGif from "../../LoadingGif";
+import HomePageShimmer from "../../shimmers/HomePage";
 
 const Clothings = () => {
   //set state variables
@@ -46,11 +47,14 @@ const Clothings = () => {
         </div>
         )
       ) : (
-        <div className="w-full flex align-center justify-center">
-          {
-            <LoadingGif />
-          }
-        </div>
+        <>
+          <div className="hidden md:grid">
+            <HomePageShimmer />
+          </div>
+          <div className="block md:hidden w-full flex align-center justify-center">
+            {<LoadingGif />}
+          </div>
+        </>
       )}
     </div>
   );

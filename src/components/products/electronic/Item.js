@@ -24,7 +24,7 @@ const Item = (props) => {
         <div className="relative pb-48 overflow-hidden">
           <Link to={`/product/${product.id}`}>
             <img
-              className="absolute inset-0 h-full w-full object-cover"
+              className="object-cover md:w-full absolute inset-0 h-full w-full object-cover"
               src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
               alt={product.title}
             />

@@ -106,7 +106,7 @@ const Header = () => {
             </svg>
 
             <div
-              className="absolute -mt-4 ml-4 bg-red-400 p-1 text-xs"
+              className="absolute border border-purple-600 -mt-4 ml-4 bg-red-400 p-1 text-xs"
               style={{ borderRadius: "50%" }}
             >
               {cart === null ? 0 : cart.length}

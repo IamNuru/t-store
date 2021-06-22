@@ -39,7 +39,7 @@ const Item = (props) => {
       <div className="img">
         <Link to={`/product/${product.id}`}>
           <img
-            className="w-full h-48 max-h-48"
+            className="object-cover md:w-full h-48 max-h-48"
             src={`${process.env.REACT_APP_URL}/storage/images/products/${product.image}`}
             alt={product.title}
           />

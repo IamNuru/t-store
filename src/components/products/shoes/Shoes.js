@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 import Item from "./Item";
+import HomePageShimmer from "../../shimmers/HomePage";
 import LoadingGif from "../../LoadingGif";
 
 const Shoes = (props) => {
   /* const {getShoes, shoes } = productsContext; */
 
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState(true);
   const [shoes, setShoes] = useState(null);
 
   useEffect(() => {
@@ -16,10 +17,10 @@ const Shoes = (props) => {
         .get(`${process.env.REACT_APP_API_URL}/products/homepage/shoes?limit=6`)
         .then((res) => {
           setShoes(res.data);
-          setLoading(false)
+          setLoading(false);
         })
         .catch((err) => {
-          setLoading(false)
+          setLoading(false);
         });
     };
     getHomePageCategoryProducts();
@@ -43,13 +44,18 @@ const Shoes = (props) => {
           </div>
         ) : (
           <div className="mt-20 w-full flex align-center justify-center">
-          No Data
-        </div>
+            No Data
+          </div>
         )
       ) : (
-        <div className="w-full flex align-center justify-center">
-          {<LoadingGif />}
-        </div>
+        <>
+          <div className="hidden md:grid">
+            <HomePageShimmer />
+          </div>
+          <div className="block md:hidden w-full flex align-center justify-center">
+            {<LoadingGif />}
+          </div>
+        </>
       )}
     </div>
   );
